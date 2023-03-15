@@ -1,0 +1,108 @@
+<?php
+include('connect.php');
+
+// if(isset($_POST['save']))
+// {
+    $one = $_POST['one'];
+    $two = $_POST['two'];
+    $three = $_POST['three'];
+    $input_one = filter_var($_POST['input_one'], FILTER_SANITIZE_STRING);
+    $input_two = filter_var($_POST['input_two'], FILTER_SANITIZE_STRING);
+    $input_three = filter_var($_POST['input_three'], FILTER_SANITIZE_STRING);
+
+    // Validate input
+    if (!preg_match('/^[a-zA-Z0-9]+$/', $input_one) || !preg_match('/^[a-zA-Z0-9]+$/', $input_two) || !preg_match('/^[a-zA-Z0-9]+$/', $input_three)) {
+        header('location:index.php?error=invalidinput');
+        exit;
+    }
+
+    $sql = "INSERT INTO `lottery`(`lottery_a`, `lottery_b`, `lottery_c`) VALUES (:input_one,:input_two,:input_three)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindparam(':input_one',$input_one);
+    $stmt->bindparam(':input_two',$input_two);
+    $stmt->bindparam(':input_three',$input_three);
+    $stmt->execute();
+
+    if($stmt)
+    {
+        header('location:index.php');
+    }
+//}
+
+?>
+
+
+<!-- only numbers -->
+<?php
+if(isset($_POST['save']))
+{
+    $one = $_POST['one'];
+    $two = $_POST['two'];
+    $three = $_POST['three'];
+    $input_one = $_POST['input_one'];
+    $input_two = $_POST['input_two'];
+    $input_three = $_POST['input_three'];
+
+    if(preg_match('/^[0-9]+$/', $input_one) && preg_match('/^[0-9]+$/', $input_two) && preg_match('/^[0-9]+$/', $input_three))
+    {
+        $sql = "INSERT INTO `lottery`(`lottery_a`, `lottery_b`, `lottery_c`) VALUES (:input_one,:input_two,:input_three)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindparam(':input_one',$input_one);
+        $stmt->bindparam(':input_two',$input_two);
+        $stmt->bindparam(':input_three',$input_three);
+        $stmt->execute();
+
+        if($stmt)
+        {
+            header('location:index.php');
+        }
+    }
+    else
+    {
+        header('location:index.php?error=invalidinput');
+    }
+}
+
+info@com2us.com 
+hello! i am one of the gamer or player of your popular game "the world of magic", and now i am dissapointed of this game because a lots of bots takes all over the map . I am emailing you it's because i just want to suggest in order the game will not abused and fair to the real players wanted to play. What if you will put a respawn time to those characters get killed by mobs or players, and the more the characters get killed the respawn time will also increase.
+
+this is just my suggestion and i hope you will noticed..thanks
+
+<!-- 
+<?php
+$servername = "localhost";
+$username = "your_username";
+$password = "your_password";
+$dbname = "your_database_name";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if the form has been submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  // Get the form input values
+  $input_one = $_POST["input_one"];
+  $input_two = $_POST["input_two"];
+  $input_three = $_POST["input_three"];
+  $result = $_POST["result"];
+
+  // Insert the game result into the database
+  $sql = "INSERT INTO game_results (input_one, input_two, input_three, result)
+  VALUES ('$input_one', '$input_two', '$input_three', '$result')";
+
+  if ($conn->query($sql) === TRUE) {
+    echo "Game result saved successfully";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+}
+
+// Close the database connection
+$conn->close();
+?> -->
