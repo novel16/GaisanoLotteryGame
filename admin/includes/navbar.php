@@ -1,3 +1,22 @@
+<?php
+    session_start();
+    include('../connect.php');
+
+    if(isset($_SESSION['admin']))
+    {
+        $admin = $_SESSION['admin'];
+
+        $sql = "SELECT * FROM user WHERE username = :username";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindparam(':username', $admin);
+        $stmt->execute();
+
+        $admin_fetch = $stmt->fetch(PDO:: FETCH_ASSOC);
+    }
+
+
+?>
+
 <div class="navigation">
             <div class="n1">
             
@@ -16,13 +35,14 @@
                 <div class="profile-box">
                     <div class="profile-content">
                         <img src="../images/gaisano.png">
-                        <span>Gaisano Capital</span>
-                        <p>Created since Feb. 22</p>
+                        <span><?php echo $admin_fetch['fullname']; ?></span>
+                        <p style = "text-transform: capitalize;"><?php echo $admin_fetch['username']; ?></p>
+                        <p>Created since: <?php echo date('F  Y', strtotime($admin_fetch['date_created'])); ?></p>
                     </div>
                 </div>
                 <div class="profile-btn">
-                    <a href="#">Update</a>
-                    <a href="#">New Admin</a>
+                    <a href="profile.php">Profile</a>
+                    <!-- <a href="#">New Admin</a> -->
                 </div>
             </div>
         </div>
