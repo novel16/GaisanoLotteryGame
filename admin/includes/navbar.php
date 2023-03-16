@@ -22,7 +22,7 @@
                 </div>
                 <div class="profile-btn">
                     <a href="#">Update</a>
-                    <!-- <a href="#">Sign out</a> -->
+                    <a href="#">New Admin</a>
                 </div>
             </div>
         </div>
