@@ -242,7 +242,25 @@ else{
         //     let response = JSON.parse(xhr.responseText);
             if(randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
                         message.style = "color: green";
-                        message.innerHTML = "YOU WIN A GRAND PRIZE!!!"; 
+                        message.innerHTML = "YOU WIN"; 
+                        Swal.fire({
+                        title: '<span style="font-size: 4rem;">YOU WIN A GRAND PRIZE!</span>',
+                        width: 450,
+                        padding: '8em',
+                        color: 'green',
+                        background: '#fff url(images/winner-win.gif) center no-repeat',
+                        backdrop: `
+                            rgba(0,0,0,0.6)
+                            url("images/congrats.gif")
+                            
+                            cover
+                            no-repeat`
+                        }).then((result) => {
+                            input_one.value = "";
+                            input_two.value = "";
+                            input_three.value = "";
+                            input_none.autofocus()
+                        });
                     }
                    
                     else if(randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value) {
