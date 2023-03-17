@@ -1,3 +1,4 @@
+<?php include('includes/session.php'); ?>
 <?php
 include('../connect.php');
     $today =date('Y-m-d');

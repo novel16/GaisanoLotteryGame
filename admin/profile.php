@@ -1,4 +1,4 @@
-
+<?php include('includes/session.php'); ?>
     <?php
     include('../connect.php');
 
@@ -31,7 +31,7 @@
         }
         else
         {
-            
+
         }
 
     }
