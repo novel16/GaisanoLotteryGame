@@ -242,9 +242,6 @@ body{
     font-weight: 500;
     border-radius: .5rem;
 }
-.profile-setting .admin-profile form .admin-buttons a{
-    
-}
 .profile-setting .admin-profile form .admin-buttons button{
     background: rgb(63, 63, 223);
     color: #fff;
