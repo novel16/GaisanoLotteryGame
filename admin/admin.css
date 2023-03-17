@@ -159,6 +159,97 @@ body{
     transition: all .3s ease-in;
 }
 
+/* Profile setting */
+.profile-setting{
+    width: 100%;
+    position: relative;
+}
+.profile-setting .profile-logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.8;
+}
+.profile-setting .profile-logo h2{
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+.profile-setting .profile-logo img{
+    width: 150px;
+    border-radius: 50%;
+    box-shadow: .1rem .1rem .5rem rgba(109, 107, 107, 0.5);
+}
+.profile-setting .profile-logo span{
+    font-size: 2rem;
+    font-weight: 500;
+}
+.profile-setting .profile-logo p{
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+   
+}
+.profile-setting .profile-logo p i{
+    font-size: .8rem;
+    margin-right: .3rem;
+    color: green;
+}
+.profile-setting .admin-profile{
+    width: 100%;
+    padding: 3rem 8%;
+    position: relative;
+}
+.profile-setting .admin-profile h2{
+    font-size: 3rem;
+    font-weight: 700;
+}
+.profile-setting .admin-profile form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+.profile-setting .admin-profile form .user-profile{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.profile-setting .admin-profile form .user-profile span{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.profile-setting .admin-profile form .user-profile input{
+    outline: none;
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    border-radius: .5rem;
+    border: 1px solid rgba(78, 77, 77, 0.5);
+}
+.profile-setting .admin-profile form .admin-buttons{
+    margin-top: 1.5rem;
+}
+.profile-setting .admin-profile form .admin-buttons .btn-admin{
+    outline: none;
+    border: none;
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    border-radius: .5rem;
+}
+.profile-setting .admin-profile form .admin-buttons a{
+    
+}
+.profile-setting .admin-profile form .admin-buttons button{
+    background: rgb(63, 63, 223);
+    color: #fff;
+}
+
 
 
 

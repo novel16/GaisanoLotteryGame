@@ -12,8 +12,8 @@
             <!-- <li><i class="fa-solid fa-code-branch"></i><a href="#">Orders</a></li>
             <li><i class="fa-solid fa-calendar"></i><a href="#">Sales</a></li>
             <li><i class="fa-solid fa-user"></i><a href="#">User</a></li> -->
-            <li><i class="fa-solid fa-gear"></i><a href="#">Setting</a></li>
-            <li><i class="fa-solid fa-right-from-bracket"></i><a href="logout.php">Sign out</a></li>
+            <li><i class="fa-solid fa-gear"></i><a href="profile.php">Profile Setting</a></li>
+            <!-- <li><i class="fa-solid fa-right-from-bracket"></i><a href="logout.php">Sign out</a></li> -->
             
         </div>
     </section>

@@ -42,7 +42,7 @@
                 </div>
                 <div class="profile-btn">
                     <a href="profile.php">Profile</a>
-                    <!-- <a href="#">New Admin</a> -->
+                    <a href="logout.php">Sign Out</a>
                 </div>
             </div>
         </div>
