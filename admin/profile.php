@@ -36,6 +36,38 @@
 
     }
 
+    
+    //store function
+
+       $sql1 = "SELECT * FROM store";
+       $stmt1 = $conn->prepare($sql1);
+       $stmt1->execute();
+       
+       $fetch_branch = $stmt1->fetch(PDO::FETCH_ASSOC);
+
+   if(isset($_POST['store_save']))
+   {
+       $branch = $_POST['branch'];
+       $contact = $_POST['contact'];
+       $address = $_POST['address'];
+
+       
+           //update
+       $sql = "UPDATE `store` SET `branch`=:branch,`contact`=:contact,`address`=:address";
+       $stmt = $conn->prepare($sql);
+       $stmt->bindParam(':branch', $branch);
+       $stmt->bindParam(':contact', $contact);
+       $stmt->bindParam(':address', $address);
+       $stmt->execute();
+
+           
+           
+
+   }
+
+
+    
+
     ?>
 
 
@@ -82,15 +114,40 @@
                     <form action="" method ="POST">
                         <div class="user-profile">
                             <span>Username</span>
-                            <input type="text" name = "username" value = "<?php echo $admin_fetch['username']; ?>" readonly>
+                            <input type="text" class="form-control" name = "username" value = "<?php echo $admin_fetch['username']; ?>" readonly>
                         </div>
                         <div class="user-profile">
                             <span>fullname</span>
-                            <input type="text" name = "fullname" value = "<?php echo $admin_fetch['fullname']; ?>" >
+                            <input type="text" class="form-control" name = "fullname" value = "<?php echo $admin_fetch['fullname']; ?>" >
                         </div>
                         <div class="admin-buttons">
                             <a class="btn-admin" href="#">Reset Password</a>
                             <button class="btn-admin" type = "submit" name ="update_admin">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- store -->
+
+                <div class="admin-profile">
+                    <h2>Store Information</h2>
+                    <form action="profile.php" method ="POST">
+                        <div class="user-profile">
+                            <span>Store Name</span>
+                            <input type="text" class="form-control" name = "branch" value = "<?php echo $fetch_branch['branch']; ?>" >
+                        </div>
+                        
+                        <div class="user-profile">
+                            <span>Contact no.</span>
+                            <input type="text" class="form-control" name = "contact" value = "<?php echo $fetch_branch['contact']; ?>" >
+                        </div>
+                        <div class="user-profile">
+                            <span>Address</span>
+                            <textarea name="address" class="form-control" id="" cols="30" rows="4"><?php echo $fetch_branch['address']; ?></textarea>
+                        </div>
+                        <div class="admin-buttons">
+                            <!-- <a class="btn-admin" href="#">Reset Password</a> -->
+                            <button class="btn-admin" type = "submit" name ="store_save">Save</button>
                         </div>
                     </form>
                 </div>

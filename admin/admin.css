@@ -228,6 +228,7 @@ body{
     padding: .5rem 1rem;
     font-size: 1.5rem;
     font-weight: 300;
+    text-transform: capitalize;
     border-radius: .5rem;
     border: 1px solid rgba(78, 77, 77, 0.5);
 }
@@ -245,6 +246,11 @@ body{
 .profile-setting .admin-profile form .admin-buttons button{
     background: rgb(63, 63, 223);
     color: #fff;
+}
+.profile-setting .admin-profile form textarea{
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: capitalize;
 }
 
 
