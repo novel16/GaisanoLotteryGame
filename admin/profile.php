@@ -25,15 +25,7 @@
         $stmt->bindparam(':username', $username);
         $stmt->execute();
 
-        if($stmt)
-        {
-            header('location: profile.php');
-        }
-        else
-        {
-
-        }
-
+        
     }
 
     
@@ -47,26 +39,36 @@
 
    if(isset($_POST['store_save']))
    {
+       $store_id = $_POST['store_id'];
        $branch = $_POST['branch'];
        $contact = $_POST['contact'];
        $address = $_POST['address'];
 
        
            //update
-       $sql = "UPDATE `store` SET `branch`=:branch,`contact`=:contact,`address`=:address";
+       $sql = "UPDATE `store` SET `branch`=:branch,`contact`=:contact,`address`=:address WHERE store_id = :store_id";
        $stmt = $conn->prepare($sql);
+       $stmt->bindParam(':store_id', $store_id);
        $stmt->bindParam(':branch', $branch);
        $stmt->bindParam(':contact', $contact);
        $stmt->bindParam(':address', $address);
        $stmt->execute();
 
-           
+      if($stmt)
+        {
+            header('location: profile.php');
+        }
+        else
+        {
+
+        }
+
            
 
    }
 
 
-    
+  
 
     ?>
 
@@ -80,11 +82,15 @@
     <title>Lottery Game | Website</title>
     <!-- <link rel="stylesheet" href="../css/datatable.css"> -->
     <link rel="stylesheet" href="admin.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="../fontawesome/all.min.css" />
+     <script src="../fontawesome/6fc1f0eac0.js"></script>
+
+    
 </head>
 <body>
     
@@ -97,7 +103,7 @@
     <?php include('includes/navbar.php'); ?>
 
         <h3 class="i-name">
-            Profile Setting
+             Settings
         </h3>
 
 
@@ -130,10 +136,11 @@
                 <!-- store -->
 
                 <div class="admin-profile">
-                    <h2>Store Information</h2>
+                    <h2>Branch Information</h2>
                     <form action="profile.php" method ="POST">
                         <div class="user-profile">
-                            <span>Store Name</span>
+                            <span>Branch Name</span>
+                            <input type="text" hidden class="form-control" name = "store_id" value = "<?php echo $fetch_branch['store_id']; ?>" >
                             <input type="text" class="form-control" name = "branch" value = "<?php echo $fetch_branch['branch']; ?>" >
                         </div>
                         
@@ -160,13 +167,6 @@
 
     </section>
 
-     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>                   
-     <script type="text/javascript">
-            $(document).ready(function() {
-            $('#mydatatable').DataTable();
-            });
-     </script>
 
-    <!-- <?php include('includes/script.php'); ?> -->
 </body>
 </html>

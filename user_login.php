@@ -47,6 +47,18 @@ if(isset($_POST['login1']))
 else{
    // header('location: user_login.php');
 }
+
+
+
+
+
+       $sql1 = "SELECT * FROM store";  
+       $stmt1 = $conn->prepare($sql1);
+       $stmt1->execute();
+       
+       $fetch_branch = $stmt1->fetch(PDO::FETCH_ASSOC);
+        
+
     
 
 ?>
@@ -57,7 +69,10 @@ else{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lottery Game | Website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="fontawesome/all.min.css" />
+    <script src="fontawesome/all.min.js"></script>
     <!-- <link rel="stylesheet" href="admin.css"> -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
@@ -199,7 +214,7 @@ img{
 </head>
 <body>
     <div class="login-container">
-        <h1>Gaisano Capital Lottery Game</h1>
+        <h1><?php echo $fetch_branch['branch']; ?> Lottery Game</h1>
         <div class="login-box">
             <h3>Login Credentials</h3>
             <form action="user_login.php" method = "POST">
