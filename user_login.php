@@ -29,6 +29,7 @@ if(isset($_POST['login1']))
         {
             header('location: customer_input.php');
             $_SESSION['user'] = $fetch['username'];
+            $_SESSION['user-success'] = 'Welcome Back!';
             
             
         }
@@ -190,7 +191,7 @@ img{
     margin: 0 .5rem;
 }
 .copyright{
-    position:absolute;
+    position:fixed;
     display:flex;
     justify-content:center;
     align-items:center;

@@ -58,6 +58,7 @@ if(isset($_POST['invoice']))
 
             if($stmt)
             {
+                $_SESSION['success'] = 'Customer successfully added!';
                 $_SESSION['invoice'] = $invoice;
                 header('location: customer_input.php');
                 

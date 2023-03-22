@@ -25,6 +25,8 @@
         $stmt->bindparam(':username', $username);
         $stmt->execute();
 
+        $_SESSION['update-message'] = 'Data successfully updated!';
+
         
     }
 
@@ -54,8 +56,11 @@
        $stmt->bindParam(':address', $address);
        $stmt->execute();
 
+       $_SESSION['store-message'] = 'Data successfully updated!';
+
       if($stmt)
         {
+           
             header('location: profile.php');
         }
         else
@@ -63,7 +68,7 @@
 
         }
 
-           
+       
 
    }
 
@@ -166,6 +171,52 @@
 
 
     </section>
+
+        <?php   
+            if(isset($_SESSION['update-message'])){
+                ?>
+                    <div id="success-message" class="alert-msg">
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="msg">
+                            <span>Data Updated</span>
+                            <p><?php echo $_SESSION['update-message']; ?></p>
+                        </div>
+                    </div>
+                <script>
+                    setTimeout(function() {
+                        var successMessage = document.getElementById('success-message');
+                        successMessage.style.right = '-110%';
+                    }, 5000); // hide the success message after 5 seconds
+                </script>
+
+            <?php }
+            unset($_SESSION['update-message']);
+        ?>
+         <?php   
+            if(isset($_SESSION['store-message'])){
+                ?>
+                    <div id="success-message" class="alert-msg">
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="msg">
+                            <span>Data Updated</span>
+                            <p><?php echo $_SESSION['store-message']; ?></p>
+                        </div>
+                    </div>
+                <script>
+                    setTimeout(function() {
+                        var successMessage = document.getElementById('success-message');
+                        successMessage.style.right = '-110%';
+                    }, 5000); // hide the success message after 5 seconds
+                </script>
+
+            <?php }
+            unset($_SESSION['store-message']);
+        ?>
+
 
 
 </body>

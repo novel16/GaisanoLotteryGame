@@ -835,6 +835,38 @@ td{
     
 }
 
+/* Alert Message */
+
+.alert-msg{
+    position: fixed;
+    right: .5rem;
+    bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(87, 154, 128, 0.924);
+    padding: .5rem 2rem;
+    border-radius: .5rem;
+    color: #fff;
+    z-index: 20;
+    box-shadow: .2rem .2rem .2rem rgba(134, 133, 133, 0.6);
+    border-top: 2px solid green;
+    transition: all .5s linear;
+}
+.alert-msg .icon{
+    margin-right: 1rem;
+    font-size: 2rem;
+}
+.alert-msg .msg span{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.alert-msg .msg p{
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+
 
 
 

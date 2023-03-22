@@ -22,6 +22,7 @@ if(isset($_POST['login']))
         if($verify_pass == 1 && $fetch['role'] == 'Admin')
         {
             $_SESSION['admin'] = $fetch['username'];
+            $_SESSION['admin-success'] = 'Welcome Back!';
             header('location: home.php');
             
         }

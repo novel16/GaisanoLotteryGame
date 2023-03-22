@@ -148,6 +148,31 @@ include('../connect.php');
 
     </section>
 
+
+    <?php   
+            if(isset($_SESSION['admin-success'])){
+                ?>
+                    <div id="success-message" class="alert-msg">
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="msg">
+                            <span>Login Successfully</span>
+                            <p><?php echo $_SESSION['admin-success']; ?></p>
+                        </div>
+                    </div>
+                <script>
+                    setTimeout(function() {
+                        var successMessage = document.getElementById('success-message');
+                        successMessage.style.right = '-110%';
+                    }, 5000); // hide the success message after 5 seconds
+                </script>
+
+            <?php }
+            unset($_SESSION['admin-success']);
+        ?>
+
+
     <script src="../js/chart/chart.js"></script>
     <script src="../js/jquery/jquery-3.6.3.js"></script>
 

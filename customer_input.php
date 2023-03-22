@@ -18,6 +18,10 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
     <!-- bootstrap -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="fontawesome/all.min.css">
+    <script src="fontawesome/6fc1f0eac0.js"></script>
 </head>
 <body>
 
@@ -98,6 +102,54 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
     </div>
     
 </div>
+
+        <?php
+            if(isset($_SESSION['success'])){
+                ?>
+                    <div id="success-message" class="alert-msg">
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="msg">
+                            <span>Customer Added</span>
+                            <p><?php echo $_SESSION['success']; ?></p>
+                        </div>
+                    </div>
+                <script>
+                    setTimeout(function() {
+                        var successMessage = document.getElementById('success-message');
+                        successMessage.style.right = '-110%';
+                    }, 5000); // hide the success message after 5 seconds
+                </script>
+
+            <?php }
+            unset($_SESSION['success']);
+             ?>
+
+            
+        <?php   
+            if(isset($_SESSION['user-success'])){
+                ?>
+                    <div id="success-message" class="alert-msg">
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="msg">
+                            <span>Login Successfully</span>
+                            <p><?php echo $_SESSION['user-success']; ?></p>
+                        </div>
+                    </div>
+                <script>
+                    setTimeout(function() {
+                        var successMessage = document.getElementById('success-message');
+                        successMessage.style.right = '-110%';
+                    }, 5000); // hide the success message after 5 seconds
+                </script>
+
+            <?php }
+            unset($_SESSION['user-success']);
+        ?>
+
 
     <div class="footer">
         <p>© Created by <span>Gaisano corp. programmers </span> | all right reserved.</p>
