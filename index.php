@@ -244,6 +244,7 @@ else{
                         Swal.fire({
                         title: '<span style="font-size: 4rem;">YOU WIN A GRAND PRIZE!</span>',
                         width: 450,
+                        allowOutsideClick: false,
                         padding: '8em',
                         color: 'green',
                         background: '#fff url(images/winner-win.gif) center no-repeat',
@@ -267,6 +268,7 @@ else{
                         Swal.fire({
                         title: '<span style="font-size: 4rem;">YOU WIN A CONSOLATION PRIZE-2!</span>',
                         width: 450,
+                        allowOutsideClick: false,
                         padding: '8em',
                         color: 'green',
                         background: '#fff url(images/winner-win.gif) center no-repeat',
@@ -289,6 +291,7 @@ else{
                         Swal.fire({
                         title: '<span style="font-size: 4rem;">YOU WIN A CONSOLATION PRIZE-2!</span>',
                         width: 450,
+                        allowOutsideClick: false,
                         padding: '8em',
                         color: 'green',
                         background: '#fff url(images/winner-win.gif) center no-repeat',
@@ -311,6 +314,7 @@ else{
                         Swal.fire({
                         title: '<span style="font-size: 4rem;">YOU WIN A CONSOLATION PRIZE-2!</span>',
                         width: 450,
+                        allowOutsideClick: false,
                         padding: '8em',
                         color: 'green',
                         background: '#fff url(images/winner-win.gif) center no-repeat',
@@ -333,6 +337,7 @@ else{
                         Swal.fire({
                         title: '<span style="font-size: 4rem;">YOU WIN A CONSOLATION PRIZE-1!</span>',
                         width: 450,
+                        allowOutsideClick: false,
                         padding: '8em',
                         color: 'green',
                         background: '#fff url(images/winner-win.gif) center no-repeat',
