@@ -132,7 +132,6 @@
                             <input type="text" class="form-control" name = "fullname" value = "<?php echo $admin_fetch['fullname']; ?>" >
                         </div>
                         <div class="admin-buttons">
-                            <a class="btn-admin" href="#">Reset Password</a>
                             <button class="btn-admin" type = "submit" name ="update_admin">Save Changes</button>
                         </div>
                     </form>
