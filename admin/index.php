@@ -29,6 +29,7 @@ html{
 body{
     
     background: #8a9e9e;
+    height: 100vh;
 
 }
 
@@ -122,6 +123,31 @@ img{
     font-weight:300;
 }
 
+
+@media(max-width: 550px){
+    html{
+        font-size: 45%;
+    }
+    body{
+        max-height: 100vh;
+    }
+}
+@media(max-width: 720px){
+    html{
+        font-size: 50%;
+    }
+    body{
+        max-height: 100vh;
+    }
+}
+@media(max-width: 991px){
+    html{
+        font-size: 55%;
+    }
+    body{
+        max-height: 100vh;
+    }
+}
 
     </style>
 </head>

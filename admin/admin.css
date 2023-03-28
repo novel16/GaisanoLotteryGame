@@ -732,6 +732,7 @@ td{
    text-align: right;
    position: relative;
    width: 100%;
+   
 }
 .date-picker .date-box{
     width: 18rem;
@@ -879,11 +880,50 @@ td{
 
 
 
-
 @media(max-width:991px)
 {
     html{
         font-size: 55%;
+    }
+}
+@media(max-width:850px)
+{
+    html{
+        font-size: 52%;
+    }
+    #interface .navigation .search{
+        display: none;
+    }
+    #menu-btn{
+        display: block;
+        
+    }
+    #close{
+        display: block;
+        transition: all .5s linear;
+    }
+    #menu{
+        background: #111827;
+        width: 25rem;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: -130%;
+        z-index: 3;
+        transition: all .5s linear;
+        
+    }
+    #menu.active{
+        left: -1.5rem;
+    }
+    #interface{
+        width: 100%;
+        margin-left: 0;
+    }
+    #interface .navigation{
+        width: 100%;
+        z-index: 2;
+       
     }
 }
 
@@ -929,8 +969,22 @@ td{
     }
 }
 
-@media(max-width: 420px){
+@media(max-width: 550px){
     html{
         font-size: 45%;
+    }
+    
+
+    .date-picker .date-box{
+        width: 12rem;
+    }
+    .date-picker .date-box button{
+        padding: .2rem .5rem;
+    }
+    .date-picker .date-box:first-child{
+        width: 12rem;
+    }
+    .date-picker .date-box:first-child i{
+        font-size: 1.1rem;
     }
 }

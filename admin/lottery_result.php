@@ -40,20 +40,21 @@
         <div class="table-container" id="table-container">
             <form action="" method = "GET">
                 <div class="date-picker">
+                   
                     <div class="date-box">
                         <input type="search" id="search" name="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>"  placeholder = "Search">
                         <button type = "submit" name = "btn_search"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     </form>
-                    <div class="date-box">
-                    <form action="" method = "GET">
-                        <input type="date" id="from" name="from" value="<?php echo isset($_GET['from']) ? $_GET['from'] : ''; ?>">
-                    </div>
-                    <span>-</span>
-                    <div class="date-box">
-                        <input type="date" id="to" name="to" value="<?php echo isset($_GET['to']) ? $_GET['to'] : ''; ?>">
-                    </div>
-                    <button class="btn-date" type= "submit" name = "submit" >Apply</button>
+                        <div class="date-box">
+                        <form action="" method = "GET">
+                            <input type="date" id="from" name="from" value="<?php echo isset($_GET['from']) ? $_GET['from'] : ''; ?>">
+                        </div>
+                        <span>-</span>
+                        <div class="date-box">
+                            <input type="date" id="to" name="to" value="<?php echo isset($_GET['to']) ? $_GET['to'] : ''; ?>">
+                        </div>
+                        <button class="btn-date" type= "submit" name = "submit" >Apply</button>
                 </div>
             </form>
             
