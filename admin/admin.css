@@ -504,6 +504,19 @@ body{
     padding: 30px 30px 0 30px;
     font-size: 24px;
     font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.i-name span{
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.5);
+}
+.i-name span i{
+    margin-right: .2rem;
+    color: #111827;
 }
 .h4-text{
     font-size: 2rem;

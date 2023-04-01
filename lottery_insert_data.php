@@ -48,6 +48,7 @@ session_start();
         else
         {
             $status = "Lose";
+            $prizes = "N/A";
         }
         $sql = "INSERT INTO `lottery`(`c_invoice`, `lottery_a`, `lottery_b`, `lottery_c`, `result_a`, `result_b`, `result_c`,`status`, `prize`) VALUES (:invoice,:input_one,:input_two,:input_three, :result_a, :result_b, :result_c,:status,:prize)";
         $stmt = $conn->prepare($sql);

@@ -14,7 +14,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lottery Game | Website</title>
     <link rel="stylesheet" href="style1.css">
-
+    <link rel="icon" href="images/gaisano.png" type="image/x-icon">
     <!-- bootstrap -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -46,7 +46,9 @@ include('../connect.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lottery Game | Website</title>
+
     <link rel="stylesheet" href="admin.css">
+    <link rel="icon" href="../images/gaisano.png" type="image/x-icon">
     <!-- bootstrap -->
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -67,8 +69,16 @@ include('../connect.php');
 
         <h3 class="i-name">
             Dashboard
-        </h3>  
+            <div class="home-gauge">
+                <span><i class="fa-solid fa-gauge"></i>Home</span>
+                <span>></span>
+                <span>Dashboard</span>
+            </div>
+            
+            
 
+        </h3>  
+        
 
         <div class="dashboard">
             <div class="box-container">

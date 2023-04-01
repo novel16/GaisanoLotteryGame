@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lottery Game | Website</title>
+    <link rel="icon" href="../images/gaisano.png" type="image/x-icon">
     <!-- <link rel="stylesheet" href="../css/datatable.css"> -->
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
@@ -29,6 +30,11 @@
 
         <h3 class="i-name">
             Lottery Result
+            <div class="home-gauge">
+                <span><i class="fa-solid fa-gauge"></i>Home</span>
+                <span>></span>
+                <span>Lottery Result</span>
+            </div>
         </h3>
 
         <!-- <div class="dash-home">
@@ -267,13 +273,7 @@
 
     </section>
 
-     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>                   
-     <script type="text/javascript">
-            $(document).ready(function() {
-            $('#mydatatable').DataTable();
-            });
-     </script>
 
-    <!-- <?php include('includes/script.php'); ?> -->
+    
 </body>
 </html>

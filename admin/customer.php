@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <link rel="icon" href="../images/gaisano.png" type="image/x-icon">
 
      <!-- fontawesome -->
     <link rel="stylesheet" href="../fontawesome/all.min.css" />
@@ -30,13 +31,14 @@
 
         <h3 class="i-name">
             Customer
+            <div class="home-gauge">
+                <span><i class="fa-solid fa-gauge"></i>Home</span>
+                <span>></span>
+                <span>Customer</span>
+            </div>
         </h3>
 
-        <!-- <div class="dash-home">
-        <i class="fa-solid fa-gauge"></i><a href="#">Home</a>
-            <span>></span>
-            <span>Lottery result</span>
-        </div> -->
+      
         
         <div class="table-container" id="table-container">
             <form action="" method = "GET">
@@ -157,27 +159,12 @@
     </section>
 
 
-    <!-- <script>
-        function searchCustomer() {
-        var search = document.getElementById("search").value;
-
-        if(search != "") {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if(this.readyState == 4 && this.status == 200) {
-                    //document.getElementById("result").innerHTML = this.responseText;
-                }
-            };
-            xmlhttp.open("GET", "customer.php?search=" + search, true);
-            xmlhttp.send();
-        }
-        }
-    </script> -->
+   
 
    
 
      
     
-    <!-- <?php include('includes/script.php'); ?> -->
+   
 </body>
 </html>

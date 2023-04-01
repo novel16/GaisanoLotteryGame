@@ -71,6 +71,8 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lottery Game | Website</title>
 
+    <link rel="icon" href="images/gaisano.png" type="image/x-icon">
+
     <!-- fontawesome -->
     <link rel="stylesheet" href="fontawesome/all.min.css" />
     <script src="fontawesome/all.min.js"></script>
