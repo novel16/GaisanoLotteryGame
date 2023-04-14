@@ -226,7 +226,12 @@ body{
     margin-top: 2.5rem;
     font-size: 5rem;
     font-weight: 500;
-    color: rgb(108, 219, 108);
+    color: green;
+    
+}
+.marquee-h1 span{
+    color: blue;
+    font-weight: 500;
 }
 
 
@@ -247,6 +252,42 @@ body{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+  }
+
+
+  .entries{
+    position: fixed;
+    width: 20rem;
+    height: 10rem;
+    z-index: 10;
+    top: 7rem;
+    right: 3rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: .5rem;
+    background: linear-gradient(to right, #5D3891, #5c276b);
+    border: 3px solid #ff093a;
+    box-shadow: .2rem .2rem 1rem rgba(126, 125, 125, 0.6);
+
+  }
+  .entries h5{
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: #fff;
+    margin: .5rem;
+  }
+  .entries .entries-box input{
+    width: 100%;
+    height: 5rem;
+    text-align: center;
+    font-size: 5.5rem;
+    font-weight: 500;
+    border-radius: .5rem;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
   }
 
 

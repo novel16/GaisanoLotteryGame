@@ -9,6 +9,7 @@ if(!isset($_SESSION['user']))
 if(isset($_SESSION['invoice']))
 {
     $invoice = $_SESSION['invoice'];
+    $invoice = json_encode($invoice);
 }
 else{
     echo '<script>
@@ -17,6 +18,7 @@ else{
        </script>';
        exit;
 }
+    
 
 ?>
 
@@ -29,6 +31,10 @@ else{
     <title>Lottery Game</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/gaisano.png" type="image/x-icon">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     
 </head>
 <body>
@@ -36,14 +42,25 @@ else{
     <?php include('nav-bar.php'); ?>
     
     <marquee direction="left" scrollamount="15">
-    <h1 class="marquee-h1"><?php echo $invoice; ?> is now ready to play Lottery Game! </h1>
+    <h1 class="marquee-h1"><?php echo $invoice; ?> <span>- is now ready to play Lottery Game! </span></h1>
     </marquee>
+
+    
+    <div class="entries" id="entries">
+        <h5>Total Entries</h5>
+        <div class="entries-box">
+            <input type="text" id="total_entry"  name="total_entry" readonly>
+            <!-- <div id="total_entry"  name="total_entry"></div> -->
+        </div>
+    </div>
+    
+   
 
   
 
 
     <div class="container">
-    <h1 id="message" class="animate__bounceInDown">Lottery Game</h1>
+    <h1 id="message" class="">Lottery Game</h1>
         <div class="lottery">
             <div class="image">
                 <img class="slot" src="images/slot.png" alt="">
@@ -76,6 +93,8 @@ else{
             </form>
         </div>
     </div>
+
+   
 
    
     
@@ -209,6 +228,7 @@ else{
   const input_two = document.getElementById('input_two');
   const input_three = document.getElementById('input_three');
   const reloadInput = document.getElementById('reload-input');
+  var totalEntry = document.getElementById('total_entry');
   
   let table = document.getElementById('mytable');
 
@@ -219,7 +239,19 @@ else{
     if (input_one.value === "" || input_two.value === "" || input_three.value === "") {
       message.style = "color: red";
       message.innerHTML = "Place your number!";
-    } else {
+    }
+    else if(totalEntry.value == 0)
+    {
+        // message.innerHTML = "You have already used all the lottery entries.";
+        Swal.fire(
+        'Not Enough Entries',
+        '<span class = "text-danger">You have already used all the lottery entries.</span>',
+        'info'
+        )
+        btn.disabled = true; 
+        
+    }
+    else {
       let intervalId = setInterval(function() {
         numberone();
         numbertwo();
@@ -235,10 +267,14 @@ else{
        let xhr = new XMLHttpRequest();
         xhr.open('POST', 'lottery_insert_data.php');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        
         xhr.onload = function() {
+            
         //   if (xhr.status === 200 && xhr.responseText) {
         //     let response = JSON.parse(xhr.responseText);
-            if(randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
+            // document.getElementById("entries").innerHTML = this.responseText;
+                   
+                    if(randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
                         message.style = "color: green";
                         message.innerHTML = "YOU WIN"; 
                         Swal.fire({
@@ -261,6 +297,7 @@ else{
                             input_none.autofocus()
                         });
                     }
+                    
                    
                     else if(randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value) {
                         message.style = "color: green";
@@ -353,18 +390,20 @@ else{
                             input_three.value = "";
                             input_none.autofocus()
                         });
-                        
-                        
+                         
                     }
+                    
                     
 
                      else {
                         
                         message.innerHTML = "YOU LOSE!";
                         message.style = "color: red";  
-                    }    
+                    }   
                    
-        };
+                          
+        }
+        
         let params = "one=" + encodeURIComponent(randomone.innerHTML) + "&two=" + encodeURIComponent(randomtwo.innerHTML) + "&three=" + encodeURIComponent(randomthree.innerHTML) + "&input_one=" + encodeURIComponent(input_one.value) + "&input_two=" + encodeURIComponent(input_two.value) + "&input_three=" + encodeURIComponent(input_three.value);
         xhr.send(params);  
       }, 3000); 
@@ -392,6 +431,40 @@ else{
 </script>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script> -->
+<script src="js/jquery/jquery-3.6.3.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        var invoice = <?php echo $invoice; ?>;
+
+        // alert(invoice);
+
+        setInterval(function() {
+        // make AJAX request to server to check for updates
+        $.ajax({
+            url: 'entries.php',
+            type: 'GET',
+            data: { invoice: invoice },
+            dataType: 'json',
+            success: function(response) {
+            
+                $("#total_entry").val(response);
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Error checking for updates: ' + textStatus + ', ' + errorThrown);
+            }
+        });
+        }, 50);
+
+    });
+
+        
+
+</script>
+
 </body>
 </html>
 

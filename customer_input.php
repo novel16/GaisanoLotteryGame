@@ -19,6 +19,8 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    
+
     <!-- fontawesome -->
     <link rel="stylesheet" href="fontawesome/all.min.css">
     <script src="fontawesome/6fc1f0eac0.js"></script>
@@ -29,13 +31,15 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
 
 <div class="customer-content">
     <h2>Customer Input</h2>
+    <span class="text-danger">Note : the amount needed to avail the lottery is atleast ₱1000 and up.</span>
 
     <div class="container-box">
         <form action="check_invoice.php" method = "POST">
             <div class="input-content">
                 <div class="left-input">
                     <input type="text" name = "invoice" value ="<?php echo isset($_POST['invoice']) ? $_POST['invoice'] : ''; ?>" placeholder = "Enter your invoice no." onkeyup = "checkInvoice(this.value)" required>
-                    <input type="number" name = "amount" placeholder = "Enter amount " required>
+                    <input type="text" id="amount" name = "amount"  placeholder = "Enter amount (₱1000) and up."  required>
+                    
                     <input type="text" name = "fullname" placeholder ="Enter your fullname" required>
                 </div>
                 <div class="right-input">
@@ -156,11 +160,17 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
     </div>
     
 
+    <script src="js/sweetalert/sweetalert2@11.js"></script>
 
         
     <script>
     document.getElementById("phone").addEventListener("input", function (event) {
     if (!/^[0-9]+$/.test(event.target.value)) {
+        event.target.value = event.target.value.slice(0, -1);
+    }
+    });
+    document.getElementById("amount").addEventListener("input", function (event) {
+    if (!/^[0-9]+(\.[0-9]*)?$/.test(event.target.value)) {
         event.target.value = event.target.value.slice(0, -1);
     }
     });
@@ -189,5 +199,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
             xhttp.send("invoice=" + invoice);
         }
     </script>
+
+    
 </body>
 </html>
