@@ -2,7 +2,7 @@
 include('connect.php');
 
 // get the invoice value from the AJAX request
-$invoice = $_GET['invoice'];
+$invoice = $_POST['invoice'];
 
 $sql = "SELECT * FROM customer_entries WHERE customer_invoice = :invoice";
 

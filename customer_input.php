@@ -60,7 +60,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
             <table class = "table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Invoice</th>
+                        <th>ID NO.</th>
                         <th>Amount</th>
                         <th>Name</th>
                         <th>E-mail</th>
@@ -82,7 +82,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
                             ?>
         
                                 <tr>
-                                    <td><?php echo $row['invoice']; ?></td>
+                                    <td><?php echo $row['id']; ?></td>
                                     <td><?php echo $row['amount']; ?></td>
                                     <td><?php echo $row['fullname']; ?></td>
                                     <td><?php echo $row['email']; ?></td>

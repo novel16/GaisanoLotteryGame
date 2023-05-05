@@ -1,4 +1,8 @@
 <?php
+
+use function PHPSTORM_META\elementType;
+
+include('connect.php');
 session_start();
 
 if(!isset($_SESSION['user']))
@@ -6,21 +10,43 @@ if(!isset($_SESSION['user']))
     header('location: user_login.php');
 }
 
-if(isset($_SESSION['invoice']))
-{
-    $invoice = $_SESSION['invoice'];
-    $invoice = json_encode($invoice);
-}
-else{
-    echo '<script>
-           alert("Please enter customer data to play lottery game!");
-           window.location = "customer_input.php";
-       </script>';
-       exit;
-}
+// if(isset($_SESSION['invoice']) || isset($_SESSION['fullname']))
+// {
+//     //$invoice = $_SESSION['invoice'];
+//     $fullname = $_SESSION['fullname'];
+//     //$invoice = json_encode($invoice);
+// }
+// else{
+//     
+//        exit;
+// }
+    
+
+        $sql = "SELECT c.id, c.invoice, c.fullname, s.status, e.total_entries from customer as c INNER JOIN customer_status as s ON c.invoice = s.customer_invoice INNER JOIN customer_entries AS e ON c.invoice = e.customer_invoice WHERE status = 'Pending' ORDER BY id ASC LIMIT 1 ";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+            $invoice = $row['invoice'];
+            $fullname = $row['fullname'];
+            $invoice = json_encode($invoice);
+
+        if($row['status'] != 'Pending')
+        {
+            echo '<script>
+            alert("Please enter customer data to play lottery game!");
+            window.location = "customer_input.php";
+            </script>';
+        }
+        else{
+
+            
+
+        }
     
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +68,7 @@ else{
     <?php include('nav-bar.php'); ?>
     
     <marquee direction="left" scrollamount="15">
-    <h1 class="marquee-h1"><?php echo $invoice; ?> <span>- is now ready to play Lottery Game! </span></h1>
+    <h1 class="marquee-h1" style="text-transform: uppercase;"><?php echo $fullname; ?> <span>- is now ready to play Lottery Game! </span></h1>
     </marquee>
 
     
@@ -231,6 +257,7 @@ else{
   var totalEntry = document.getElementById('total_entry');
   
   let table = document.getElementById('mytable');
+  var invoice_lottery = <?php echo $invoice; ?>;
 
 
   
@@ -404,7 +431,7 @@ else{
                           
         }
         
-        let params = "one=" + encodeURIComponent(randomone.innerHTML) + "&two=" + encodeURIComponent(randomtwo.innerHTML) + "&three=" + encodeURIComponent(randomthree.innerHTML) + "&input_one=" + encodeURIComponent(input_one.value) + "&input_two=" + encodeURIComponent(input_two.value) + "&input_three=" + encodeURIComponent(input_three.value);
+        let params = "invoice=" + encodeURIComponent(invoice_lottery) + "&one=" + encodeURIComponent(randomone.innerHTML) + "&two=" + encodeURIComponent(randomtwo.innerHTML) + "&three=" + encodeURIComponent(randomthree.innerHTML) + "&input_one=" + encodeURIComponent(input_one.value) + "&input_two=" + encodeURIComponent(input_two.value) + "&input_three=" + encodeURIComponent(input_three.value);
         xhr.send(params);  
       }, 3000); 
     }
@@ -439,13 +466,13 @@ else{
 
         var invoice = <?php echo $invoice; ?>;
 
-        // alert(invoice);
+      //  alert(invoice);
 
         setInterval(function() {
         // make AJAX request to server to check for updates
         $.ajax({
             url: 'entries.php',
-            type: 'GET',
+            type: 'POST',
             data: { invoice: invoice },
             dataType: 'json',
             success: function(response) {

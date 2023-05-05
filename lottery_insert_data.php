@@ -7,8 +7,9 @@ session_start();
 // if($invoice)
 // {
     // do something with $invoice
-    
-    $invoice = $_SESSION['invoice'];
+   
+
+    $invoice = $_POST['invoice'];
     $one = $_POST['one'];
     $two = $_POST['two'];
     $three = $_POST['three'];
@@ -127,7 +128,6 @@ session_start();
 //           alert("Please enter customer data to play lottery game!");
 //        </script>';
 // }
-
 
 
 

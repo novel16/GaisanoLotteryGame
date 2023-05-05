@@ -68,6 +68,7 @@
                     <tr>
                         <th>Invoice #</th>
                         <th>Name</th>
+                        <th>Amount</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <!-- <th>Prize</th> -->
@@ -79,10 +80,10 @@
 
                     if(isset($_GET['from']) && isset($_GET['to'])){
                     
-                    $from = $_GET['from'];
-                    $to = $_GET['to'];
+                    $from = date('Y-m-d', strtotime($_GET['from']));
+                    $to = date('Y-m-d', strtotime($_GET['to']));
 
-                    $sql = "SELECT * FROM customer WHERE date_created BETWEEN :from AND :to ORDER BY date_created DESC";
+                    $sql = "SELECT * FROM customer WHERE DATE(date_created) BETWEEN :from AND :to ORDER BY date_created DESC";
                     $stmt = $conn->prepare($sql);
                     $stmt->bindparam(':from', $from);
                     $stmt->bindparam(':to', $to);
@@ -96,6 +97,7 @@
                                 <tr>
                                     <td><?php echo $row['invoice']; ?></td>
                                     <td><?php echo $row['fullname']; ?></td>
+                                    <td><?php echo $row['amount']; ?></td>
                                     <td><?php echo $row['email']; ?></td>
                                     <td><?php echo $row['phone']; ?></td>
                                     
@@ -129,6 +131,7 @@
                                         <tr>
                                             <td><?php echo $row['invoice']; ?></td>
                                             <td><?php echo $row['fullname']; ?></td>
+                                            <td><?php echo $row['amount']; ?></td>
                                             <td><?php echo $row['email']; ?></td>
                                             <td><?php echo $row['phone']; ?></td>
                                             

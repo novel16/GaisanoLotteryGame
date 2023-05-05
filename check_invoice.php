@@ -63,12 +63,23 @@ if(isset($_POST['invoice']))
                     $stmt->bindparam(':email', $email);
                     $stmt->bindparam(':phone', $phone);
                     $stmt->execute();
-                    $session_invoice = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                    if($stmt !== false)
+                    
+
+                    if($stmt)
                     {
                         $_SESSION['success'] = 'Customer successfully added!';
-                        $_SESSION['invoice'] = $invoice;
+                       // $_SESSION['invoice'] = $invoice;
+                        $_SESSION['fullname'] = $fullname;
+
+                       
+
+                        $customer_status_sql = "INSERT INTO `customer_status`(`customer_invoice`) VALUES (:customer_invoice)";
+                        $customer_status_stmt = $conn->prepare($customer_status_sql);
+                        $customer_status_stmt->bindParam(':customer_invoice', $invoice);
+                        $customer_status_stmt->execute();
+                        
+
                         header('location: customer_input.php');
                         
                     }

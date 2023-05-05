@@ -37,11 +37,7 @@
             </div>
         </h3>
 
-        <!-- <div class="dash-home">
-        <i class="fa-solid fa-gauge"></i><a href="#">Home</a>
-            <span>></span>
-            <span>Lottery result</span>
-        </div> -->
+       
         
         <div class="table-container" id="table-container">
             <form action="" method = "GET">
@@ -85,10 +81,10 @@
 
                     if(isset($_GET['from']) && isset($_GET['to'])){
                     
-                    $from = $_GET['from'];
-                    $to = $_GET['to'];
+                        $from = date('Y-m-d', strtotime($_GET['from']));
+                        $to = date('Y-m-d', strtotime($_GET['to']));
 
-                    $sql = "SELECT l.id , l.c_invoice , c.fullname, l.lottery_a , l.lottery_b , l.lottery_c , l.result_a , l.result_b , l.result_c , l.status , l.prize, l.date FROM lottery AS l INNER JOIN customer AS c ON l.c_invoice = c.invoice WHERE l.date BETWEEN :from AND :to ORDER BY date DESC";
+                    $sql = "SELECT l.id , l.c_invoice , c.fullname, l.lottery_a , l.lottery_b , l.lottery_c , l.result_a , l.result_b , l.result_c , l.status , l.prize, l.date FROM lottery AS l INNER JOIN customer AS c ON l.c_invoice = c.invoice WHERE DATE(l.date) BETWEEN :from AND :to ORDER BY date DESC";
                     $stmt = $conn->prepare($sql);
                     $stmt->bindparam(':from', $from);
                     $stmt->bindparam(':to', $to);
@@ -268,9 +264,14 @@
                     ?>
                 </tbody>
             </table>
+            <!-- <ul class="pagination float-end" style="margin-top:-.8rem;">
+                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul> -->
         </div>
-
-
     </section>
 
 
