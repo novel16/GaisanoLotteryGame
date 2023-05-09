@@ -10,56 +10,59 @@ html{
     font-size: 62.2%;
 }
 body{
-    height: 100vh;
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    flex-direction: column;
+    
     background: url(images/115.jpg) no-repeat;
     background-size: cover;
     background-position: center;
+    
 
     
 }
 
 .container{
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    
+    
+    
 }
 .container .lottery{
     padding: 4rem;
-    width: 550px;
-    background: rgb(46, 45, 45);
+    width: 52rem;
+    background: #5c276b;
     border-radius: .5rem;
     box-shadow: .1rem .1rem 1rem rgba(163, 160, 160, 0.5);
     transition: all .3s ease-in-out;
     border: 1.2rem solid #ff093a;
     box-shadow: 0rem 1.5rem 2rem rgba(7, 7, 7, 0.6);
-    background-image: url(images/slotmachine.PNG);
+    /* background-image: url(images/slotmachine.PNG);
     background-position: center;
     background-size: cover;
-    position: relative;
+    position: relative; */
 
 }
 #message{
-    font-size: 5rem;
+    font-size: 3.5rem;
     font-weight: 700;
-    background: #921515dd;
+    background: #5c276b;
     padding: .5rem;
     border-top-right-radius: .5rem;
     border-top-left-radius: .5rem;
     color: #c99121;
-    border-right: 1.2rem solid #ff093a;
-    border-top: 1.2rem solid #ff093a;
-    border-left: 1.2rem solid #ff093a;
+    border-right: 1rem solid #ff093a;
+    border-top: 1rem solid #ff093a;
+    border-left: 1rem solid #ff093a;
+    
     
 }
 
 .container .lottery .lottery-box{
-    padding: 1.5rem 0;
+    padding: 2rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,10 +72,10 @@ body{
     border-radius: .5rem;
 }
 .container .lottery .lottery-box .odometer{
-    width: 120px;
-    height: 150px;
+    width: 10rem;
+    height: 12.5rem;
     text-align: center;
-    font-size: 15rem;
+    font-size: 12rem;
     font-weight: 700;
     margin-right: 2rem;
     background: #fff;
@@ -90,16 +93,18 @@ body{
 }
 
 .container .lottery-input{
-    margin-top: 2.5rem;
-    padding: 3rem 6rem;
+    margin-top: 1.5rem;
+    padding: 1rem 7rem 2rem 7rem;
     background: #5c276b;
     border-radius: .5rem;
-    width: 550px;
+    width: 52rem;
     box-shadow: 0rem 1.5rem 2rem rgba(7, 7, 7, 0.6);
     border: 1.2rem solid #ff093a;
 }
 .container .lottery-input h3{
+    text-transform: capitalize;
     font-size: 3rem;
+    color: #c99121;
     margin-bottom: 2rem;
     color: linear-gradient(to right, #FF0032, #5D3891);
 }
@@ -107,17 +112,17 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: orange;
+    background: #c99121;
     padding: 2rem 0;
     border-radius: .5rem;
-    box-shadow: .5rem .5em 1.5rem rgba(126, 125, 125, 0.6);
+    box-shadow: 1rem 1rem .1rem rgba(7, 7, 7, 0.6);
 }
 .container .lottery-input .lottery-box input{
-    width: 65px;
-    height: 80px;
+    width: 6rem;
+    height: 7.5rem;
     margin-right: 1rem;
     text-align: center;
-    font-size: 5rem;
+    font-size: 4.5rem;
     font-weight: 700;
     outline: none;
     background: rgba(255, 250, 250, 0.6);
@@ -177,7 +182,7 @@ body{
 .navbar .logo{
     display: flex;
     align-items: center;
-    margin-left: 9%;
+    margin-left: 5%;
 }
 .navbar .logo img{
     width: 50px;
@@ -185,9 +190,10 @@ body{
 .navbar .logo h2{
     font-size: 3.5rem;
     font-weight: 700;
+    margin-left: 1rem;
 }
 .navbar nav{
-    margin-right: 9%;
+    margin-right: 5%;
 }
 .navbar nav ul{
     list-style: none;
@@ -221,12 +227,18 @@ body{
     width: 100%;
     
 }
-
+#marquee{
+    
+    z-index: 1004;
+}
 .marquee-h1{
-    margin-top: 2.5rem;
-    font-size: 5rem;
+    margin-top: 5.5rem;
+    font-size: 4rem;
     font-weight: 500;
     color: green;
+    
+   
+    
     
 }
 .marquee-h1 span{
@@ -257,10 +269,10 @@ body{
 
   .entries{
     position: fixed;
-    width: 20rem;
-    height: 10rem;
-    z-index: 10;
-    top: 7rem;
+    width: 17rem;
+    height: 9rem;
+    z-index: 1005;
+    top: 10rem;
     right: 3rem;
     align-items: center;
     justify-content: center;
@@ -274,20 +286,20 @@ body{
   .entries h5{
     font-size: 1.7rem;
     font-weight: 500;
-    color: #fff;
+    color: #c99121;
     margin: .5rem;
   }
   .entries .entries-box input{
     width: 100%;
-    height: 5rem;
+    height: 4rem;
     text-align: center;
-    font-size: 5.5rem;
+    font-size: 4.5rem;
     font-weight: 500;
     border-radius: .5rem;
     border: none;
     outline: none;
     background: transparent;
-    color: #fff;
+    color: #c99121;
   }
 
 
@@ -302,7 +314,16 @@ body{
 
 
 
-
+  @media(max-width: 1200px)
+  {
+      html{
+          font-size: 57%;
+      }
+      /* .container .lottery, .container .lottery-input{
+        width: 45rem;
+      } */
+  }
+  
 
 @media(max-width: 991px)
 {

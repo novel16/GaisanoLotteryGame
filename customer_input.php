@@ -66,13 +66,14 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
                         <th>E-mail</th>
                         <th>Phone</th>
                         <th>Date</th>
+                        <th>Lottery Status</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
                     include('connect.php');
 
-                    $sql = "SELECT * FROM customer ORDER BY date_created DESC LIMIT 10";
+                    $sql = "SELECT c.id, c.amount, c.fullname, c.email, c.phone, c.date_created, s.status FROM customer AS c INNER JOIN customer_status AS s ON c.invoice = s.customer_invoice ORDER BY date_created DESC LIMIT 10";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
 
@@ -88,6 +89,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
                                     <td><?php echo $row['email']; ?></td>
                                     <td><?php echo $row['phone']; ?></td>
                                     <td><?php echo date('F j, Y', strtotime($row['date_created'])); ?></td>
+                                    <td><?php echo $row['status']; ?></td>
                                     
                                 </tr>
                             <?php

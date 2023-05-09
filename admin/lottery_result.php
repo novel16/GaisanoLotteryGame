@@ -84,7 +84,7 @@
                         $from = date('Y-m-d', strtotime($_GET['from']));
                         $to = date('Y-m-d', strtotime($_GET['to']));
 
-                    $sql = "SELECT l.id , l.c_invoice , c.fullname, l.lottery_a , l.lottery_b , l.lottery_c , l.result_a , l.result_b , l.result_c , l.status , l.prize, l.date FROM lottery AS l INNER JOIN customer AS c ON l.c_invoice = c.invoice WHERE DATE(l.date) BETWEEN :from AND :to ORDER BY date DESC";
+                    $sql = "SELECT * FROM vwlottery_result WHERE DATE(date) BETWEEN :from AND :to ORDER BY date DESC";
                     $stmt = $conn->prepare($sql);
                     $stmt->bindparam(':from', $from);
                     $stmt->bindparam(':to', $to);

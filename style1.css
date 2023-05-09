@@ -159,7 +159,7 @@ body{
 .navbar .logo{
     display: flex;
     align-items: center;
-    margin-left: 9%;
+    margin-left: 5%;
 }
 .navbar .logo img{
     width: 50px;
@@ -170,7 +170,7 @@ body{
     margin-left: 1rem;
 }
 .navbar nav{
-    margin-right: 9%;
+    margin-right: 5%;
 }
 .navbar nav ul{
     list-style: none;
@@ -182,7 +182,7 @@ body{
     text-decoration: none;
     color: #ebe8e8;
     font-size: 1.5rem;
-    margin-left: 2.5rem;
+    margin-left: 1.5rem;
     font-weight: 500;
     position: relative;
     transition: all .4s;

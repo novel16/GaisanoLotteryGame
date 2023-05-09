@@ -258,7 +258,7 @@ img{
     <div class="copyright">
         <span>Powered by</span>
         <img src="images/gaisano.png" alt="">
-        <span>SOFTDEV</span>
+        <span>- SOFTDEV</span>
     </div>
     
 

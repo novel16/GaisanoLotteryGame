@@ -67,10 +67,7 @@ if(!isset($_SESSION['user']))
 
     <?php include('nav-bar.php'); ?>
     
-    <marquee direction="left" scrollamount="15">
-    <h1 class="marquee-h1" style="text-transform: uppercase;"><?php echo $fullname; ?> <span>- is now ready to play Lottery Game! </span></h1>
-    </marquee>
-
+    
     
     <div class="entries" id="entries">
         <h5>Total Entries</h5>
@@ -80,44 +77,46 @@ if(!isset($_SESSION['user']))
         </div>
     </div>
     
-   
-
-  
-
 
     <div class="container">
-    <h1 id="message" class="">Lottery Game</h1>
-        <div class="lottery">
-            <div class="image">
-                <img class="slot" src="images/slot.png" alt="">
-                <img class="baston" src="images/baston1.png" alt="">
-            </div>
-            
-            <form action="lottery_insert_data.php" id= "" name="save" method = "POST">
-                        <div class="lottery-box">
-                            
-                            <div id="one" class="odometer"  name="one" >0</div>
-                            <div id="two" class="odometer" name="two" >0</div>
-                            <div id="three" class="odometer" name="three" >0</div>
-                        </div>
-                    
-                </div>
 
-                <div class="lottery-input" id = "reload-input">
+        <marquee id="marquee" direction="left" scrollamount="20">
+        <h1 class="marquee-h1" style="text-transform: uppercase;"><?php echo $fullname; ?> <span>- is now ready to play Lottery Game! </span></h1>
+        </marquee>
+
+
+        <h1 id="message" class="">Lottery Game</h1>
+            <div class="lottery">
+                <!-- <div class="image">
+                    <img class="slot" src="images/slot.png" alt="">
+                    <img class="baston" src="images/baston1.png" alt="">
+                </div>
+                 -->
+                <form action="lottery_insert_data.php" id= "" name="save" method = "POST">
+                <div class="lottery-box">
+                    
+                    <div id="one" class="odometer"  name="one" >0</div>
+                    <div id="two" class="odometer" name="two" >0</div>
+                    <div id="three" class="odometer" name="three" >0</div>
+                </div>
+                        
+            </div>
+
+            <div class="lottery-input" id = "reload-input">
                     <h3>place your 3-digit number</h3>
 
-                        <div class="lottery-box">
-                            
-                            <input type="text" autofocus name="input_one" id="input_one" maxlength="1">
-                            
-                            <input type="text" name="input_two" id="input_two" maxlength="1">
-                            
-                            <input type="text" name="input_three" id="input_three" maxlength="1">
-                            <input type="button" value="Start" id="btnStart" class="btnStart" >
-                        </div>
-                
-            </form>
-        </div>
+                    <div class="lottery-box">
+                                
+                        <input type="text" autofocus name="input_one" id="input_one" maxlength="1">
+                                
+                        <input type="text" name="input_two" id="input_two" maxlength="1">
+                                
+                        <input type="text" name="input_three" id="input_three" maxlength="1">
+                        <input type="button" value="Start" id="btnStart" class="btnStart" >
+                    </div>
+                    
+                </form>
+            </div>
     </div>
 
    
