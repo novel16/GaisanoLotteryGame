@@ -4,8 +4,8 @@ session_start();
 
 //$invoice = isset($_SESSION['invoice']) ? $_SESSION['invoice'] : null;
 
-// if($invoice)
-// {
+if(isset($_POST['one']) && isset($_POST['two']) && isset($_POST['three']))
+{
     // do something with $invoice
    
 
@@ -40,22 +40,22 @@ session_start();
             else if($one === $input_one && $two === $input_two)
             {
                 $status = "Win";
-                $prizes = "Consolation-2";
+                $prizes = "2nd Prize";
             }
             else if($one === $input_one && $three === $input_three)
             {
                 $status = "Win";
-                $prizes = "Consolation-2";
+                $prizes = "2nd Prize";
             }
             else if($two === $input_two && $three === $input_three)
             {
                 $status = "Win";
-                $prizes = "Consolation-2";
+                $prizes = "2nd Prize";
             }
             else if($one === $input_one || $two === $input_two || $three === $input_three)
             {
                 $status = "Win";
-                $prizes = "Consolation-1";
+                $prizes = "3rd Prize";
             }
             else
             {
@@ -81,20 +81,12 @@ session_start();
                 $entry_sql = "UPDATE customer_entries SET total_entries = total_entries - 1 WHERE customer_invoice = :invoice";
             
                 $entry_stmt = $conn->prepare($entry_sql);
-                // $entry_stmt->bindParam(':total_entries', -1);
                 $entry_stmt->bindParam(':invoice', $invoice);
                 $entry_stmt->execute();
                 $entry_fetch = $entry_stmt->fetch(PDO::FETCH_ASSOC);
                 $data = $entry_fetch['total_entries'];
+
                 
-                // if($fetch_entry['total_entries'] == 1)
-                // {
-                //     unset($_SESSION['invoice']);
-                    
-                // }
-               
-                echo '200';
-                header('location:index.php');
             }
 
         }
@@ -118,18 +110,11 @@ session_start();
         echo '<script>
             alert("Invalid input");
         </script>';
-        // header('location:index.php?error=invalidinput');
+        
     }
-// }
-// else
-// {
-   
-//     echo '<script>
-//           alert("Please enter customer data to play lottery game!");
-//        </script>';
-// }
 
 
+}
 
 ?>
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lottery Game | Website</title>
+    <title>GCAP Slots - Customer</title>
     <!-- <link rel="stylesheet" href="../css/datatable.css"> -->
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
@@ -16,6 +16,10 @@
      <!-- fontawesome -->
     <link rel="stylesheet" href="../fontawesome/all.min.css" />
      <script src="../fontawesome/6fc1f0eac0.js"></script>
+
+      <!-- datatable -->
+      <link rel="stylesheet" href="../css/datatable.css">
+
 
     
 </head>
@@ -41,7 +45,7 @@
       
         
         <div class="table-container" id="table-container">
-            <form action="" method = "GET">
+            <!-- <form action="" method = "GET">
                 <div class="date-picker">
                     <div class="date-box">
                         <input type="search" id="search" name="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>"  placeholder = "Search">
@@ -59,101 +63,22 @@
                     </div>
                     <button class="btn-date" type= "submit" name = "submit" >Apply</button>
                 </div>
-            </form>
+            </form> -->
             
             <!-- <a href="#" class= "btn btn-success"><i class="fa-solid fa-circle-plus me-1"></i>New</a> -->
-            <hr>
-            <table class = "table table-bordered table-striped" id = "mydatatable">
+            
+            <table class = "table table-borderless table-striped" id = "mydatatable">
                 <thead>
                     <tr>
-                        <th>Invoice #</th>
+                        <th>ID No.</th>
                         <th>Name</th>
-                        <th>Amount</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <!-- <th>Prize</th> -->
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    include('../connect.php');
-
-                    if(isset($_GET['from']) && isset($_GET['to'])){
-                    
-                    $from = date('Y-m-d', strtotime($_GET['from']));
-                    $to = date('Y-m-d', strtotime($_GET['to']));
-
-                    $sql = "SELECT * FROM customer WHERE DATE(date_created) BETWEEN :from AND :to ORDER BY date_created DESC";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bindparam(':from', $from);
-                    $stmt->bindparam(':to', $to);
-                    $stmt->execute();
-
-                    if($stmt->rowCount()>0)
-                    {
-                        while($row = $stmt->fetch(PDO:: FETCH_ASSOC)){
-                            ?>
-        
-                                <tr>
-                                    <td><?php echo $row['invoice']; ?></td>
-                                    <td><?php echo $row['fullname']; ?></td>
-                                    <td><?php echo $row['amount']; ?></td>
-                                    <td><?php echo $row['email']; ?></td>
-                                    <td><?php echo $row['phone']; ?></td>
-                                    
-                                </tr>
-        
-                            <?php
-                             }
-                    }
-                    else
-                    {
-                        echo '<div class ="no-record">No record found</div>';
-                    }
-                    }
-
-                     if(isset($_GET['search']))
-                    {
-                        $search = $_GET['search'];
-
-                        if($search != "")
-                        {
-                            $sql = "SELECT * FROM customer WHERE CONCAT(invoice, fullname, email) LIKE '%$search%'";
-                            $stmt = $conn->prepare($sql);
-                            // $stmt->bindparam(':search', $search);
-                            $stmt->execute();
-
-                            if($stmt->rowCount()>0)
-                            {
-                                while($row = $stmt->fetch(PDO:: FETCH_ASSOC)){
-                                    ?>
-                
-                                        <tr>
-                                            <td><?php echo $row['invoice']; ?></td>
-                                            <td><?php echo $row['fullname']; ?></td>
-                                            <td><?php echo $row['amount']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
-                                            <td><?php echo $row['phone']; ?></td>
-                                            
-                                        </tr>
-                
-                                    <?php
-                                    }
-                            }
-                            else
-                            {
-                                echo '<div class ="no-record">No record found</div>';
-                            }
-                        }
-
-                        
-                    }
-                    else
-                    {
-                        
-                    }
-                    
-                    ?>
+                   
                 </tbody>
             </table>
         </div>
@@ -167,7 +92,22 @@
    
 
      
-    
+    <script src="../js/jquery/jquery-3.6.3.js"></script>
+    <script src="../js/datatable.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#mydatatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: 'fetch_customer_result.php',
+               
+            });
+        });
+
+    </script>
    
 </body>
 </html>

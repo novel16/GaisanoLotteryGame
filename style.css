@@ -11,12 +11,19 @@ html{
 }
 body{
     
-    background: url(images/115.jpg) no-repeat;
-    background-size: cover;
+    background: url(images/gaisano.png) no-repeat;
+    background-size:cover;
     background-position: center;
-    
-
-    
+}
+body::after{
+    content: '';
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.1);
+    z-index: 1;
 }
 
 .container{
@@ -27,6 +34,8 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
+    z-index: 100;
     
     
     
@@ -50,10 +59,10 @@ body{
     font-size: 3.5rem;
     font-weight: 700;
     background: #5c276b;
-    padding: .5rem;
+    padding: .5rem 1.5rem;
     border-top-right-radius: .5rem;
     border-top-left-radius: .5rem;
-    color: #c99121;
+    color: #fff;
     border-right: 1rem solid #ff093a;
     border-top: 1rem solid #ff093a;
     border-left: 1rem solid #ff093a;
@@ -113,7 +122,7 @@ body{
     justify-content: center;
     align-items: center;
     background: #c99121;
-    padding: 2rem 0;
+    padding: 2rem 1rem;
     border-radius: .5rem;
     box-shadow: 1rem 1rem .1rem rgba(7, 7, 7, 0.6);
 }
@@ -132,11 +141,30 @@ body{
     
     
 }
-.container .lottery-input .lottery-box input:last-child{
+.container .lottery-input .lottery-box input:nth-child(4){
     font-size: 1.7rem;
     cursor: pointer;
     box-shadow: .1rem .1em .1rem rgba(30, 19, 19, 0.6);
     border-radius: .5rem;
+    margin-right: 1rem;
+}
+.container .lottery-input .lottery-box input:last-child{
+    height: 2.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: .5rem;
+    background: linear-gradient(to right, #5c276b, rgb(20, 20, 193));
+    margin-right: 0;
+    font-weight: 300;
+    border: none;
+    outline: none;
+    color: #fff;
+    text-decoration: underline;
+    font-style: italic;
+    right: -29%;
+    
+    
     
     
 }
@@ -228,7 +256,7 @@ body{
     
 }
 #marquee{
-    
+    position:relative;
     z-index: 1004;
 }
 .marquee-h1{
@@ -236,6 +264,10 @@ body{
     font-size: 4rem;
     font-weight: 500;
     color: green;
+    position:relative;
+    z-index: 1005;
+    
+    
     
    
     
@@ -268,12 +300,12 @@ body{
 
 
   .entries{
-    position: fixed;
-    width: 17rem;
-    height: 9rem;
+    position: absolute;
+    width: 15.5rem;
+    height: 8rem;
     z-index: 1005;
     top: 10rem;
-    right: 3rem;
+    right: 2.5rem;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -286,7 +318,7 @@ body{
   .entries h5{
     font-size: 1.7rem;
     font-weight: 500;
-    color: #c99121;
+    color: #fff;
     margin: .5rem;
   }
   .entries .entries-box input{
@@ -299,9 +331,23 @@ body{
     border: none;
     outline: none;
     background: transparent;
-    color: #c99121;
+    color: #fff;
   }
-
+  .next-player{
+    position: absolute;
+    width: 17rem;
+    height: 9rem;
+    z-index: 1005;
+    top: 10rem;
+    left: 3rem;
+    
+  }
+  .next-player button{
+    font-size: 1.3rem;
+    padding: .7rem 1.5rem;
+    font-weight: 500;
+  }
+  
 
 
 

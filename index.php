@@ -1,6 +1,17 @@
 <?php
-
+error_reporting(0);
 use function PHPSTORM_META\elementType;
+
+    $today =date('Y-m-d');
+    $current_day = date('l');
+    $current_day = json_encode($current_day);
+
+    // if(isset($_GET['day']))
+    // {
+    //     $day = $_GET['day'];
+    //     $day = json_encode($day);
+    // }
+
 
 include('connect.php');
 session_start();
@@ -10,19 +21,11 @@ if(!isset($_SESSION['user']))
     header('location: user_login.php');
 }
 
-// if(isset($_SESSION['invoice']) || isset($_SESSION['fullname']))
-// {
-//     //$invoice = $_SESSION['invoice'];
-//     $fullname = $_SESSION['fullname'];
-//     //$invoice = json_encode($invoice);
-// }
-// else{
-//     
-//        exit;
-// }
-    
 
-        $sql = "SELECT c.id, c.invoice, c.fullname, s.status, e.total_entries from customer as c INNER JOIN customer_status as s ON c.invoice = s.customer_invoice INNER JOIN customer_entries AS e ON c.invoice = e.customer_invoice WHERE status = 'Pending' ORDER BY id ASC LIMIT 1 ";
+
+        $sql = "SELECT c.id, c.invoice, c.fullname, s.status, e.total_entries from customer as c 
+        INNER JOIN customer_status as s ON c.invoice = s.customer_invoice 
+        INNER JOIN customer_entries AS e ON c.invoice = e.customer_invoice WHERE status = 'Pending' ORDER BY id ASC LIMIT 1 ";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -34,7 +37,7 @@ if(!isset($_SESSION['user']))
         if($row['status'] != 'Pending')
         {
             echo '<script>
-            alert("Please enter customer data to play lottery game!");
+            alert("Please enter customer data to play GCAP SLOTS!");
             window.location = "customer_input.php";
             </script>';
         }
@@ -43,6 +46,21 @@ if(!isset($_SESSION['user']))
             
 
         }
+
+
+
+        //Grand Prize allocation day
+
+        $allocation_day_sql = "SELECT * FROM allocation WHERE status = '1'";
+        $allocation_day_stmt = $conn->prepare($allocation_day_sql);
+        $allocation_day_stmt->execute();
+        $allocation_day_row = $allocation_day_stmt->fetch(PDO::FETCH_ASSOC);
+        
+        $grand_allocation_day = $allocation_day_row['day'];
+        $grand_allocation_day = json_encode($grand_allocation_day);
+
+        
+        
     
 
 ?>
@@ -54,13 +72,16 @@ if(!isset($_SESSION['user']))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lottery Game</title>
+    <title>GCAP Slots</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="images/gaisano.png" type="image/x-icon">
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="fontawesome/all.min.css">
+    <script src="fontawesome/6fc1f0eac0.js"></script>
     
 </head>
 <body>
@@ -68,30 +89,30 @@ if(!isset($_SESSION['user']))
     <?php include('nav-bar.php'); ?>
     
     
-    
+    <!-- entries -->
     <div class="entries" id="entries">
         <h5>Total Entries</h5>
         <div class="entries-box">
             <input type="text" id="total_entry"  name="total_entry" readonly>
-            <!-- <div id="total_entry"  name="total_entry"></div> -->
+           
         </div>
+    </div>
+
+    <div class="next-player">
+        <button type="button" id="nextPlayerBtn" class="btn btn-success"><i class="fa-solid fa-forward"></i> Next Player</button>
     </div>
     
 
     <div class="container">
 
         <marquee id="marquee" direction="left" scrollamount="20">
-        <h1 class="marquee-h1" style="text-transform: uppercase;"><?php echo $fullname; ?> <span>- is now ready to play Lottery Game! </span></h1>
+        <h1 class="marquee-h1" style="text-transform: uppercase;"><?php echo $fullname; ?> <span id="marquee-message">- you are now ready to play ! </span></h1>
         </marquee>
 
 
-        <h1 id="message" class="">Lottery Game</h1>
+        <h1 id="message" class="">GCAP SLOTS</h1>
             <div class="lottery">
-                <!-- <div class="image">
-                    <img class="slot" src="images/slot.png" alt="">
-                    <img class="baston" src="images/baston1.png" alt="">
-                </div>
-                 -->
+               
                 <form action="lottery_insert_data.php" id= "" name="save" method = "POST">
                 <div class="lottery-box">
                     
@@ -113,6 +134,8 @@ if(!isset($_SESSION['user']))
                                 
                         <input type="text" name="input_three" id="input_three" maxlength="1">
                         <input type="button" value="Start" id="btnStart" class="btnStart" >
+                        <input type="button" value="Reset" id="btnReset" class="btnReset" >
+                        
                     </div>
                     
                 </form>
@@ -159,86 +182,7 @@ if(!isset($_SESSION['user']))
 
     </script>
 
-    <!-- <script>
-        const randomone = document.getElementById('one');
-        const randomtwo = document.getElementById('two');
-        const randomthree = document.getElementById('three');
-        const btn = document.getElementById('btnStart');
-        const message = document.getElementById('message');
-        const input_one = document.getElementById('input_one');
-        const input_two = document.getElementById('input_two');
-        const input_three = document.getElementById('input_three');
     
-        
-        btn.addEventListener('click', function(){
-            if(input_one.value === "" || input_two.value === "" || input_three.value === "") {
-                //btn.disabled = true;
-                message.style = "color: red";
-                message.innerHTML = "Place your number!";
-            } else {
-
-                let intervalId = setInterval(function(){
-                    numberone();
-                    numbertwo();
-                    numberthree();
-                    
-                }, 100);
-                setTimeout(function(){
-                    
-                    clearInterval(intervalId);
-                    randomone.style.animationIterationCount = "1";
-                    if(randomone.value === input_one.value && randomtwo.value === input_two.value && randomthree.value === input_three.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN A GRAND PRIZE!!!"; 
-                    }
-                   
-                    else if(randomone.value === input_one.value && randomtwo.value === input_two.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN A CONSOLATION PRIZE-2!"; 
-                    }
-                    else if(randomone.value === input_one.value && randomthree.value === input_three.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN A CONSOLATION PRIZE-2!"; 
-                    }
-                    else if(randomtwo.value === input_two.value && randomthree.value === input_three.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN A CONSOLATION PRIZE-2!"; 
-                    }
-                    else if(randomone.value == input_one.value || randomtwo.value == input_two.value || randomthree.value == input_three.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN A CONSOLATION PRIZE-1!";
-                        
-                    }
-                    
-
-                     else {
-                        
-                        message.innerHTML = "YOU LOSE!";
-                        message.style = "color: red";  
-                    }
-                    document.getElementById("form_submit").submit();
-                   
-                },5000);
-            }
-        });
-    
-        function numberone(){
-            randomone.value = (Math.floor(Math.random() *9));
-            
-        }
-        function numbertwo(){
-            randomtwo.value = (Math.floor(Math.random() *9));
-        }
-        function numberthree(){
-            randomthree.value = (Math.floor(Math.random() *9));
-            //message.style = "font-size: 3.5rem";
-            message.style = "color: blue";
-            message.innerHTML = "Wait for the result..";
-            //btn.disabled = true;
-            
-        }
-    </script> -->
-
 
 
 
@@ -254,10 +198,17 @@ if(!isset($_SESSION['user']))
   const input_three = document.getElementById('input_three');
   const reloadInput = document.getElementById('reload-input');
   var totalEntry = document.getElementById('total_entry');
+  var marqueeMessage =document.getElementById('marquee-message');
+  var btnReset =document.getElementById('btnReset');
   
   let table = document.getElementById('mytable');
   var invoice_lottery = <?php echo $invoice; ?>;
+  var currentDay = <?php echo $current_day; ?>;
+  var grandAllocationDay = <?php echo $grand_allocation_day; ?>;
 
+
+  
+alert(grandAllocationDay);
 
   
     
@@ -268,7 +219,7 @@ if(!isset($_SESSION['user']))
     }
     else if(totalEntry.value == 0)
     {
-        // message.innerHTML = "You have already used all the lottery entries.";
+       
         Swal.fire(
         'Not Enough Entries',
         '<span class = "text-danger">You have already used all the lottery entries.</span>',
@@ -283,180 +234,156 @@ if(!isset($_SESSION['user']))
         numbertwo();
         numberthree();
 
-         // Update odometer values
+       
 
         
       }, 100);
       setTimeout(function() {
        clearInterval(intervalId);
-
+       
        let xhr = new XMLHttpRequest();
         xhr.open('POST', 'lottery_insert_data.php');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         
         xhr.onload = function() {
-            
-        //   if (xhr.status === 200 && xhr.responseText) {
-        //     let response = JSON.parse(xhr.responseText);
-            // document.getElementById("entries").innerHTML = this.responseText;
-                   
-                    if(randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN"; 
-                        Swal.fire({
-                        title: '<span style="font-size: 4rem;">YOU WIN A GRAND PRIZE!</span>',
-                        width: 450,
-                        allowOutsideClick: false,
-                        padding: '8em',
-                        color: 'green',
-                        background: '#fff url(images/winner-win.gif) center no-repeat',
-                        backdrop: `
-                            rgba(0,0,0,0.6)
-                            url("images/congrats.gif")
-                            
-                            cover
-                            no-repeat`
-                        }).then((result) => {
-                            input_one.value = "";
-                            input_two.value = "";
-                            input_three.value = "";
-                            input_none.autofocus()
-                        });
-                    }
-                    
-                   
-                    else if(randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN"; 
-                        Swal.fire({
-                        title: '<span style="font-size: 4rem;">YOU WIN A CONSOLATION PRIZE-2!</span>',
-                        width: 450,
-                        allowOutsideClick: false,
-                        padding: '8em',
-                        color: 'green',
-                        background: '#fff url(images/winner-win.gif) center no-repeat',
-                        backdrop: `
-                            rgba(0,0,0,0.6)
-                            url("images/congrats.gif")
-                            
-                            cover
-                            no-repeat`
-                        }).then((result) => {
-                            input_one.value = "";
-                            input_two.value = "";
-                            input_three.value = "";
-                            input_none.autofocus()
-                        });
-                    }
-                    else if(randomone.innerHTML === input_one.value && randomthree.innerHTML === input_three.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN"; 
-                        Swal.fire({
-                        title: '<span style="font-size: 4rem;">YOU WIN A CONSOLATION PRIZE-2!</span>',
-                        width: 450,
-                        allowOutsideClick: false,
-                        padding: '8em',
-                        color: 'green',
-                        background: '#fff url(images/winner-win.gif) center no-repeat',
-                        backdrop: `
-                            rgba(0,0,0,0.6)
-                            url("images/congrats.gif")
-                            
-                            cover
-                            no-repeat`
-                        }).then((result) => {
-                            input_one.value = "";
-                            input_two.value = "";
-                            input_three.value = "";
-                            input_none.autofocus()
-                        });
-                    }
-                    else if(randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN"; 
-                        Swal.fire({
-                        title: '<span style="font-size: 4rem;">YOU WIN A CONSOLATION PRIZE-2!</span>',
-                        width: 450,
-                        allowOutsideClick: false,
-                        padding: '8em',
-                        color: 'green',
-                        background: '#fff url(images/winner-win.gif) center no-repeat',
-                        backdrop: `
-                            rgba(0,0,0,0.6)
-                            url("images/congrats.gif")
-                            
-                            cover
-                            no-repeat`
-                        }).then((result) => {
-                            input_one.value = "";
-                            input_two.value = "";
-                            input_three.value = "";
-                            input_none.autofocus()
-                        });
-                    }
-                    else if(randomone.innerHTML == input_one.value || randomtwo.innerHTML == input_two.value || randomthree.innerHTML == input_three.value) {
-                        message.style = "color: green";
-                        message.innerHTML = "YOU WIN!";
-                        Swal.fire({
-                        title: '<span style="font-size: 4rem;">YOU WIN A CONSOLATION PRIZE-1!</span>',
-                        width: 450,
-                        allowOutsideClick: false,
-                        padding: '8em',
-                        color: 'green',
-                        background: '#fff url(images/winner-win.gif) center no-repeat',
-                        backdrop: `
-                            rgba(0,0,0,0.6)
-                            url("images/congrats.gif")
-                            
-                            cover
-                            no-repeat`
-                        }).then((result) => {
-                            input_one.value = "";
-                            input_two.value = "";
-                            input_three.value = "";
-                            input_none.autofocus()
-                        });
-                         
-                    }
-                    
-                    
-
-                     else {
+            if (randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
+                // if (grandAllocationDay === currentDay) {
+                    message.style = "color: #fff";
+                    message.innerHTML = "YOU WIN THE GRAND PRIZE !";
+                // } else {
+                //     //  generateNewNumbers();
                         
-                        message.innerHTML = "YOU LOSE!";
-                        message.style = "color: red";  
-                    }   
-                   
-                          
-        }
+                //         if (randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value) {
+                //             message.style = "color: #fff";
+                //             message.innerHTML = "YOU WIN THE 2nd PRIZE !";
+                //         } else if (randomone.innerHTML === input_one.value && randomthree.innerHTML === input_three.value) {
+                //             message.style = "color: #fff";
+                //             message.innerHTML = "YOU WIN THE 2nd PRIZE !";
+                //         } else if (randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
+                //             message.style = "color: #fff";
+                //             message.innerHTML = "YOU WIN THE 2nd PRIZE !";
+                //         } else if (randomone.innerHTML === input_one.value || randomtwo.innerHTML === input_two.value || randomthree.innerHTML === input_three.value) {
+                //             message.style = "color: #fff";
+                //             message.innerHTML = "YOU WIN THE 3rd PRIZE !";
+                //         } else {
+                //             message.innerHTML = "THANK YOU! BETTER LUCK NEXT TIME!";
+                //             message.style = "color: #fff; font-size: 2.5rem; font-weight: 500;";
+                //         }
+                        
+                //     //sendRequest(); 
+                // }
+                
+            } 
+            else if (randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value) {
+                message.style = "color: #fff";
+                message.innerHTML = "YOU WIN THE 2nd PRIZE !";
+            }
+             else if (randomone.innerHTML === input_one.value && randomthree.innerHTML === input_three.value) {
+                message.style = "color: #fff";
+                message.innerHTML = "YOU WIN THE 2nd PRIZE !";
+            }
+             else if (randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
+                message.style = "color: #fff";
+                message.innerHTML = "YOU WIN THE 2nd PRIZE !";
+            } 
+             else if (randomone.innerHTML === input_one.value || randomtwo.innerHTML === input_two.value || randomthree.innerHTML === input_three.value) {
+                message.style = "color: #fff";
+                message.innerHTML = "YOU WIN THE 3rd PRIZE !";
+            } 
+             else {
+                message.innerHTML = "THANK YOU! BETTER LUCK NEXT TIME!";
+                message.style = "color: #fff; font-size: 2.5rem; font-weight: 500;";
+            }
+
+        };
+    
+    
         
-        let params = "invoice=" + encodeURIComponent(invoice_lottery) + "&one=" + encodeURIComponent(randomone.innerHTML) + "&two=" + encodeURIComponent(randomtwo.innerHTML) + "&three=" + encodeURIComponent(randomthree.innerHTML) + "&input_one=" + encodeURIComponent(input_one.value) + "&input_two=" + encodeURIComponent(input_two.value) + "&input_three=" + encodeURIComponent(input_three.value);
-        xhr.send(params);  
-      }, 3000); 
+        function generateNewNumbers() {
+            randomone.innerHTML = (Math.floor(Math.random() * 10));
+            randomtwo.innerHTML = (Math.floor(Math.random() * 10));
+            randomthree.innerHTML = (Math.floor(Math.random() * 10));
+
+        }
+
+        function sendRequest() {
+            let params = "invoice=" + encodeURIComponent(invoice_lottery) + "&one=" + encodeURIComponent(randomone.innerHTML) + "&two=" + encodeURIComponent(randomtwo.innerHTML) + "&three=" + encodeURIComponent(randomthree.innerHTML) + "&input_one=" + encodeURIComponent(input_one.value) + "&input_two=" + encodeURIComponent(input_two.value) + "&input_three=" + encodeURIComponent(input_three.value);
+            xhr.send(params);
+        }
+
+
+        if (randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
+    
+            if (grandAllocationDay !== currentDay) {
+
+                generateNewNumbers();
+
+            }
+        }
+        sendRequest(); 
+    
+      }, 1000);
     }
   });
+
+ 
+    function numberone() {
+        randomone.innerHTML = (Math.floor(Math.random() * 10)); 
+    }
+
+    function numbertwo() {
+        randomtwo.innerHTML = (Math.floor(Math.random() * 10));
+        
+    }
+
+    function numberthree() {
+        randomthree.innerHTML = (Math.floor(Math.random() * 10));
+        message.style = "color:#fff";
+        message.innerHTML = "Please wait for the result..";
+        btn.disabled = true;     
+    }
+
+
+  btnReset.addEventListener('click', function(){
+
+
+    input_one.value = "";
+    input_two.value = "";
+    input_three.value ="";
+    btn.disabled = false;
+    input_one.focus();
+    
+
+    window.addEventListener('DOMContentLoaded', function() {
+    // Set autofocus on input_one
+    input_one.focus();
+  });
+
+
+  });
+
   
-  function numberone() {
-    randomone.innerHTML = (Math.floor(Math.random() * 10));
-    
-    
-  }
+document.addEventListener('keydown', function(event) {
+  // Check if the space bar key is pressed (keyCode 32)
+  if (event.key === " " || event.key === "Spacebar") {
+    event.preventDefault(); // Prevent the default space bar behavior
 
-  function numbertwo() {
-    randomtwo.innerHTML = (Math.floor(Math.random() * 10));
-   
+    input_one.value = "";
+    input_two.value = "";
+    input_three.value = "";
+    btn.disabled = false;
+    
+    // Set autofocus on input_one
+    input_one.focus();
+    
   }
+});
 
-  function numberthree() {
-    randomthree.innerHTML = (Math.floor(Math.random() * 10));
-    
-    message.style = "color: blue";
-    message.innerHTML = "Wait for the result..";
-    
-  }
+
+
 </script>
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script> -->
+
 <script src="js/jquery/jquery-3.6.3.js"></script>
 
 <script type="text/javascript">
@@ -487,7 +414,29 @@ if(!isset($_SESSION['user']))
 
     });
 
-        
+</script>
+
+<!-- next player function -->
+<script>
+
+    var btnNext = document.querySelector('#nextPlayerBtn');
+    var total_entry =document.querySelector('#total_entry');
+
+    btnNext.onclick = function(){
+
+        if(totalEntry.value > 0)
+        {
+            Swal.fire(
+            'Incomplete Entries',
+            '<span class = "text-danger">Please make sure that all entries are used!</span>',
+            'info'
+            );
+        }
+        else{
+            window.location.reload();
+        }
+
+    }
 
 </script>
 

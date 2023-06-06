@@ -12,18 +12,27 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lottery Game | Website</title>
+    <title>GCAP Slots - Customer Input</title>
     <link rel="stylesheet" href="style1.css">
     <link rel="icon" href="images/gaisano.png" type="image/x-icon">
     <!-- bootstrap -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    
+    <!-- datatable -->
+    <link rel="stylesheet" href="css/datatable.css">
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="fontawesome/all.min.css">
     <script src="fontawesome/6fc1f0eac0.js"></script>
+
+
+    <style>
+        td{
+            text-transform: capitalize;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -31,14 +40,34 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
 
 <div class="customer-content">
     <h2>Customer Input</h2>
-    <span class="text-danger">Note : the amount needed to avail the lottery is atleast ₱1000 and up.</span>
+    <?php
+        include('connect.php');
+
+        $sql = "SELECT * FROM entries WHERE status = 'Active' ORDER BY id DESC LIMIT 1";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $fetch = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($stmt->rowCount() > 0)
+        {
+        ?>
+            <span class="text-danger" style="font-size: 1.4rem;">Note : The amount needed to avail GCAP-Slots is at least ₱<?php echo $fetch['amount']; ?> and up.</span>
+        
+        <?php
+        }else{
+        ?>
+            <span class="text-danger" style="font-size: 1.4rem;">No amount per entry found</span>
+        <?php
+        }
+        ?>
+    
 
     <div class="container-box">
         <form action="check_invoice.php" method = "POST">
             <div class="input-content">
                 <div class="left-input">
                     <input type="text" name = "invoice" value ="<?php echo isset($_POST['invoice']) ? $_POST['invoice'] : ''; ?>" placeholder = "Enter your invoice no." onkeyup = "checkInvoice(this.value)" required>
-                    <input type="text" id="amount" name = "amount"  placeholder = "Enter amount (₱1000) and up."  required>
+                    <input type="text" id="amount" name = "amount"  placeholder = "Enter amount"  required>
                     
                     <input type="text" name = "fullname" placeholder ="Enter your fullname" required>
                 </div>
@@ -47,7 +76,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
                     <input type="text" name = "phone" maxlength = "11" placeholder = "Enter your phone no. (Optional)" id="phone">
                 </div>  
             </div>
-             <button id = "submit-btn" type = "submit" name ="save">Save</button>
+             <button id = "submit-btn" type = "submit" onclick="return confirm('Are you sure, You want to add this customer?')" name ="save">Save</button>
              <span id = "invoice-error"></span>
             
         </form>
@@ -57,7 +86,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
         <h2>Customer</h2>
         
         <div class="table-container">
-            <table class = "table table-bordered table-striped">
+            <table class = "table table-borderless table-striped" id="mydatatable">
                 <thead>
                     <tr>
                         <th>ID NO.</th>
@@ -70,36 +99,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                    include('connect.php');
-
-                    $sql = "SELECT c.id, c.amount, c.fullname, c.email, c.phone, c.date_created, s.status FROM customer AS c INNER JOIN customer_status AS s ON c.invoice = s.customer_invoice ORDER BY date_created DESC LIMIT 10";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->execute();
-
-                    if($stmt->rowCount()>0)
-                    {
-                        while($row = $stmt->fetch(PDO:: FETCH_ASSOC)){
-                            ?>
-        
-                                <tr>
-                                    <td><?php echo $row['id']; ?></td>
-                                    <td><?php echo $row['amount']; ?></td>
-                                    <td><?php echo $row['fullname']; ?></td>
-                                    <td><?php echo $row['email']; ?></td>
-                                    <td><?php echo $row['phone']; ?></td>
-                                    <td><?php echo date('F j, Y', strtotime($row['date_created'])); ?></td>
-                                    <td><?php echo $row['status']; ?></td>
-                                    
-                                </tr>
-                            <?php
-                             }
-                    }
-                    else
-                    {
-                        echo '<div class ="no-record">No record found</div>';
-                    }
-                    ?>
+                
                     
                 </tbody>
             </table>
@@ -160,9 +160,13 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
     <div class="footer">
         <p>© Created by <span>Gaisano corp. programmers </span> | all right reserved.</p>
     </div>
+
     
 
     <script src="js/sweetalert/sweetalert2@11.js"></script>
+    <script src="js/jquery/jquery-3.6.3.js"></script>
+    <script src="js/datatable.js"></script>
+
 
         
     <script>
@@ -200,6 +204,24 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("invoice=" + invoice);
         }
+    </script>
+
+    
+    
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#mydatatable').DataTable({
+                order: [[0, 'desc']],
+                processing: true,
+                serverSide: true,
+                ajax: 'fetch_customer.php',
+               
+            });
+        });
+
     </script>
 
     

@@ -11,14 +11,14 @@ include('connect.php');
 <div class="navbar fixed-top">
     <div class="logo">
         <img src="images/gaisano.png" alt="">
-            <h2 >
-                <?php echo $fetch_branch['branch'] ?>
+            <h2 style="text-transform:capitalize;">
+                GCAP SLOTS - <?php echo $fetch_branch['branch'] ?>
             </h2>   
     </div>
     <nav>
         <ul>
             <li><a href="customer_input.php">Customer Input</a></li>
-            <li><a href="index.php">Lottery</a></li>
+            <li><a href="index.php">Gcap Slot</a></li>
             <li><a href="user_logout.php">Logout</a></li>
         </ul>
     </nav>

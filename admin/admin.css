@@ -5,14 +5,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif ;
 }
 html{
     font-size: 63.2%;
 }
 body{
     
-    background: #8a9e9e;
+    background: #f3f4f6 !important;
 
 }
 /* dashboard */
@@ -272,7 +272,7 @@ body{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 body{
     height: 100vh;
@@ -322,16 +322,32 @@ body{
 
 #menu .items{
     margin-top: 8rem;
+    height: 100%;
+    position: relative;
+   
 }
 #menu .items li{
     list-style: none;
     padding: 15px 0;
     transition: 0.3s ease;
+    position: relative;
+    
+    
 }
 #menu .items li:hover{
     background: #253047;
     cursor: pointer;
 
+}
+#menu .items li:nth-child(6){
+   
+    background: green;
+  
+}
+#menu .items li:last-child{
+    
+    background: red;
+ 
 }
 
 #menu .items li i{
@@ -354,6 +370,7 @@ body{
     font-weight: 300;
     transition: 0.3s ease;
 }
+
 /* --------------End of Sidebar------------ */
 
 /* ------------navbar----------- */
@@ -363,6 +380,7 @@ body{
     margin-left: 300px;
     position: relative;
     z-index: 2;
+    
 }
 /* .dash-home{
     display: flex;
@@ -728,8 +746,9 @@ body{
 
 th{
     font-size: 1.2rem;
-    font-weight: 700;
-    background: #253047;
+    font-weight: 500;
+    text-transform: capitalize;
+    
 }
 .btn{
     font-size: 10rem;
@@ -737,6 +756,7 @@ th{
 td{
     font-size: 1.1rem;
     font-weight: 300;
+    text-transform: capitalize;
 }
 .date-picker{
    display: flex;

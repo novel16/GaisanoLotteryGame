@@ -37,10 +37,18 @@ if(isset($_POST['invoice']))
                 $phone = $_POST['phone'];
                 $phone = filter_var($phone, FILTER_SANITIZE_NUMBER_INT);
 
+
+                $check_entry_sql = "SELECT * FROM entries WHERE status = 'Active' ORDER BY id DESC LIMIT 1";
+                $check_entry_stmt = $conn->prepare($check_entry_sql);
+                $check_entry_stmt->execute();
+                $check_entry_fetch = $check_entry_stmt->fetch(PDO::FETCH_ASSOC);
+
+                if($check_entry_stmt->rowCount() > 0){
+
                 
-                if($amount >= 1000)
+                if($amount >= $check_entry_fetch['amount'])
                 {
-                    $amount_per_entry = 1000;
+                    $amount_per_entry = $check_entry_fetch['amount'];
                     $total_entry = 0;
                     
                     $total_entry = floor($amount / $amount_per_entry);
@@ -96,11 +104,31 @@ if(isset($_POST['invoice']))
                 {
                    
                     echo '<script>
-                    alert("Invalid Amount | The amount should be atleast ₱1000.00 and up.");
+                    alert("Invalid Amount | The amount should be atleast ₱'.$check_entry_fetch['amount'].' and up.");
                     window.location = "customer_input.php";
                     </script>';
                     
                 }
+            }
+            else
+            {
+
+                // echo '<script>
+
+                // Swal.fire(
+                //     "Incomplete Entries",
+                //     "<span class = "text-danger">Please make sure that all entries are used!</span>",
+                //     "info"
+                //     );
+
+                // </script>';
+                echo '<script>
+                    alert("No amount/entry found | Please add amount/entry to proceed");
+                    window.location = "customer_input.php";
+                    </script>';
+                    
+
+            }
         }
         else
         {

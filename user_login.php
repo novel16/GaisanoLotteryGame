@@ -69,7 +69,7 @@ else{
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lottery Game | Website</title>
+    <title>GCAP Slots | Website</title>
 
     <link rel="icon" href="images/gaisano.png" type="image/x-icon">
 
@@ -120,11 +120,21 @@ body::after{
     
 }
 .login-container h1{
-    font-size: 4.5rem;
-    line-height:2;
+    font-size: 4rem;
+    line-height:1.5;
     font-weight: 700;
     color:#fff;
     z-index: 3;
+    text-transform: capitalize;
+    
+}
+.login-container h2{
+    font-size: 3.5rem;
+    line-height:1.5;
+    font-weight: 500;
+    color:#fff;
+    z-index: 3;
+    text-transform: capitalize;
     
 }
 .login-container .login-box{
@@ -217,7 +227,8 @@ img{
 </head>
 <body>
     <div class="login-container">
-        <h1><?php echo $fetch_branch['branch']; ?> Lottery Game</h1>
+        <h1>GCAP SLOTS</h1>
+        <h2 style="text-transform:uppercase;"><?php echo $fetch_branch['branch']; ?></h2>
         <div class="login-box">
             <h3>Login Credentials</h3>
             <form action="user_login.php" method = "POST">
@@ -230,7 +241,7 @@ img{
                     <input type="password" name = "password">
                 </div>
                 
-                <button type = "submit" name = "login1"><i class="fa-solid fa-arrow-right-to-bracket " style = "margin-right:.5rem; font-size: 1.4rem;"></i>Sign in</button>
+                <button type = "submit" name = "login1"><i class="fa-solid fa-arrow-right-to-bracket " style = "margin-right:.5rem; font-size: 1.2rem;"></i>Sign in</button>
             </form>
             
         </div>

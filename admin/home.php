@@ -22,13 +22,13 @@ include('../connect.php');
     $lottery_count = $lottery_stmt->rowCount();
 
     //to calculate the overall total of consolation-1
-    $consolation_1_sql = "SELECT * FROM lottery WHERE prize = 'Consolation-1'";
+    $consolation_1_sql = "SELECT * FROM lottery WHERE prize = '2nd prize'";
     $consolation_1_stmt = $conn->prepare($consolation_1_sql);
     $consolation_1_stmt->execute();
     $consolation_1_count = $consolation_1_stmt->rowCount();
 
     //to calculate the overall total of consolation-2
-    $consolation_2_sql = "SELECT * FROM lottery WHERE prize = 'Consolation-2'";
+    $consolation_2_sql = "SELECT * FROM lottery WHERE prize = '3rd Prize'";
     $consolation_2_stmt = $conn->prepare($consolation_2_sql);
     $consolation_2_stmt->execute();
     $consolation_2_count = $consolation_2_stmt->rowCount();
@@ -45,7 +45,7 @@ include('../connect.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lottery Game | Website</title>
+    <title>GCAP SLOTS - Dashboard</title>
 
     <link rel="stylesheet" href="admin.css">
     <link rel="icon" href="../images/gaisano.png" type="image/x-icon">
@@ -94,7 +94,7 @@ include('../connect.php');
                 <div class="box box2">
                     <div class="dash-text">
                         <h3><?php echo $lottery_count; ?></h3>
-                        <span>Lottery Played</span>
+                        <span>GCAP-Slots Played</span>
                     </div>
                     <i class="dash-logo fa-solid fa-check-to-slot"></i>
                     <a href="lottery_result.php?lottery_result=lottery_result">More Info<i class="fa-solid fa-arrow-right"></i></a>
@@ -103,7 +103,7 @@ include('../connect.php');
                 <div class="box box3">
                     <div class="dash-text">
                         <h3><?php echo $consolation_1_count; ?></h3>
-                        <span>Consolation-1</span>
+                        <span>2nd Prize</span>
                     </div>
                     <i class="dash-logo fa-solid fa-award"></i>
                     <a href="lottery_result.php?consolation-1=consolation-1">More Info<i class="fa-solid fa-arrow-right"></i></a>
@@ -112,7 +112,7 @@ include('../connect.php');
                 <div class="box box4">
                     <div class="dash-text">
                         <h3><?php echo $consolation_2_count; ?></h3>
-                        <span>Consolation-2</span>
+                        <span>3rd Prize</span>
                     </div>
                     <i class="dash-logo fa-solid fa-award"></i>
                     <a href="lottery_result.php?consolation-2=consolation-2">More Info<i class="fa-solid fa-arrow-right"></i></a>
@@ -191,8 +191,8 @@ include('../connect.php');
         $and = 'AND YEAR(date) = '.$year;
         $months = array();
         $lottery = array();
-        $consolation_1 = array();
-        $consolation_2 = array();
+        $second_prize = array();
+        $third_prize = array();
         $grand_prize = array();
 
 
@@ -203,16 +203,16 @@ include('../connect.php');
             array_push($lottery, $stmt->rowCount());
 
             //consolation-1
-            $sql = "SELECT * FROM lottery WHERE MONTH(date) = '$m' AND YEAR(date) = '$year' AND prize ='Consolation-1'";
+            $sql = "SELECT * FROM lottery WHERE MONTH(date) = '$m' AND YEAR(date) = '$year' AND prize ='2nd Prize'";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-            array_push($consolation_1, $stmt->rowCount());
+            array_push($second_prize, $stmt->rowCount());
 
             //consolation-2
-            $sql = "SELECT * FROM lottery WHERE MONTH(date) = '$m' AND YEAR(date) = '$year' AND prize ='Consolation-2'";
+            $sql = "SELECT * FROM lottery WHERE MONTH(date) = '$m' AND YEAR(date) = '$year' AND prize ='3rd Prize'";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-            array_push($consolation_2, $stmt->rowCount());
+            array_push($third_prize, $stmt->rowCount());
 
             //Grand Prize
             $sql = "SELECT * FROM lottery WHERE MONTH(date) = '$m' AND YEAR(date) = '$year' AND prize ='Grand Prize'";
@@ -228,8 +228,8 @@ include('../connect.php');
 
           $months = json_encode($months);
           $lottery = json_encode($lottery);
-          $consolation_1 = json_encode($consolation_1);
-          $consolation_2 = json_encode($consolation_2);
+          $second_prize = json_encode($second_prize);
+          $third_prize = json_encode($third_prize);
           $grand_prize = json_encode($grand_prize);
          
 
@@ -244,18 +244,18 @@ include('../connect.php');
       labels: <?php echo $months; ?>,
       datasets: [
       {
-        label: 'Total Lottery Played',
+        label: 'GCAP-Slots Played',
         data: <?php echo $lottery; ?>,
         borderWidth: 1
       },
       {
-        label: 'Consolation-1',
-        data: <?php echo $consolation_1; ?>,
+        label: '2nd Prize',
+        data: <?php echo $second_prize; ?>,
         borderWidth: 1
       },
       {
-        label: 'Consolation-2',
-        data: <?php echo $consolation_2; ?>,
+        label: '3rd Prize',
+        data: <?php echo $third_prize; ?>,
         borderWidth: 1
       },
       {
