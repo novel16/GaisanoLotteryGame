@@ -1,0 +1,1015 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif ;
+}
+html{
+    font-size: 63.2%;
+}
+body{
+    
+    background: #f3f4f6 !important;
+
+}
+/* dashboard */
+.dashboard{
+    width: 100%;
+    padding: 1rem 3rem;
+}
+.dashboard .box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem,1fr));
+    grid-gap: 1rem;
+    position: relative;
+}
+.dashboard .box-container .box{
+    width: 100%;
+    background: #1F8A70;
+    padding: .5rem 0 4.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-radius: .2rem;
+    box-shadow: .1rem .1rem .5rem rgba(109, 107, 107, 0.5);
+}
+.dashboard .box-container .box .dash-text{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+.dashboard .box-container .box .dash-text h3{
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+}
+.dashboard .box-container .box .dash-text span{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+}
+.dashboard .box-container .box .dash-logo{
+    font-size: 5rem;
+    margin-right: 1.5rem;
+    color: #d2d0d0;
+    transition: all .4s ease-in-out;
+}
+.dashboard .box-container .box .dash-logo:hover{
+    transform: scale(1.2,1.2);
+    color: #fff;
+}
+
+.dashboard .box-container .box a{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: .5rem 0;
+    text-align: center;
+    color: #fff;
+    font-size: 1.1rem;
+    text-decoration: none;
+    font-weight: 300;
+    background: rgba(109, 107, 107, 0.5);
+}
+.dashboard .box-container .box1{
+    background: #40a38a;
+}
+.dashboard .box-container .box2{
+    background: #40a38a;
+}
+.dashboard .box-container .box3{
+    background: #40a38a;
+}
+.dashboard .box-container .box4{
+    background: #40a38a;
+}
+.dashboard .box-container .box5{
+    background: #40a38a;
+}
+
+
+/* end of dashboard */
+.login-container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+.login-container .login-box{
+    background: #fff;
+    width: 35rem;
+    padding: 2rem;
+    border: 1px solid rgba(181, 179, 179, 0.5);
+}
+.login-container .login-box h3{
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+.login-container .login-box .input-group{
+    margin-bottom: 1.5rem;
+}
+.login-container .login-box .input-group span{
+    font-size: 1.4rem;
+    font-weight: 300;
+}
+.login-container .login-box .input-group input{
+    width: 20rem;
+    font-size: 1.4rem;
+    font-weight: 300;
+    padding: .3rem;
+    border: 1px solid rgba(109, 107, 107, 0.5);
+}
+.login-container .login-box button{
+    padding: .7rem 2.5rem;
+    outline: none;
+    border: none;
+    font-size: 1.5rem;
+    text-align: left;
+    background: #3C84AB;
+    font-weight: 300;
+    text-align: left;
+    color: #fff;
+    cursor: pointer;
+
+}
+.login-container .login-box button:hover{
+    background: #5eabd4;
+    transition: all .3s ease-in;
+}
+.login-container p{
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-top: 1rem;
+    width: 35rem;
+    padding: 1.3rem;
+    background: #d73b52;
+    color: #fff;
+    
+}
+.login-container p:hover{
+    background: #d7576a;
+    cursor: text;
+    transition: all .3s ease-in;
+}
+
+/* Profile setting */
+.profile-setting{
+    width: 100%;
+    position: relative;
+}
+.profile-setting .profile-logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1.8;
+}
+.profile-setting .profile-logo h2{
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+.profile-setting .profile-logo img{
+    width: 150px;
+    border-radius: 50%;
+    box-shadow: .1rem .1rem .5rem rgba(109, 107, 107, 0.5);
+}
+.profile-setting .profile-logo span{
+    font-size: 2rem;
+    font-weight: 500;
+}
+.profile-setting .profile-logo p{
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+   
+}
+.profile-setting .profile-logo p i{
+    font-size: .8rem;
+    margin-right: .3rem;
+    color: green;
+}
+.profile-setting .admin-profile{
+    width: 100%;
+    padding: 3rem 8%;
+    position: relative;
+}
+.profile-setting .admin-profile h2{
+    font-size: 3rem;
+    font-weight: 700;
+}
+.profile-setting .admin-profile form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+.profile-setting .admin-profile form .user-profile{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+.profile-setting .admin-profile form .user-profile span{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.profile-setting .admin-profile form .user-profile input{
+    outline: none;
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: capitalize;
+    border-radius: .5rem;
+    border: 1px solid rgba(78, 77, 77, 0.5);
+}
+.profile-setting .admin-profile form .admin-buttons{
+    margin-top: 1.5rem;
+}
+.profile-setting .admin-profile form .admin-buttons .btn-admin{
+    outline: none;
+    border: none;
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    border-radius: .5rem;
+}
+.profile-setting .admin-profile form .admin-buttons button{
+    background: rgb(63, 63, 223);
+    color: #fff;
+}
+.profile-setting .admin-profile form textarea{
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: capitalize;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* homepage css */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    height: 100vh;
+    width: 100%;
+    background: #dee2e7;
+    position: relative;
+    display: flex;
+}
+/* -------------Sidebar------------ */
+#close{
+    position: absolute;
+    color: #fff;
+    font-size: 2rem;
+    top: 1rem;
+    right: 1rem;
+    display: none;
+}
+#menu{
+    background: #111827;
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+#menu .logo{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    color: #fff;
+    border-bottom: 1px solid rgba(71, 70, 70, 0.4);
+    display: none;
+    
+}
+#menu .logo img{
+    width: 40px;
+    margin-right: 10px;
+    margin-top: -10px;
+    
+}
+#menu .logo h2{
+    font-size: 22px;
+    
+}
+
+#menu .items{
+    margin-top: 8rem;
+    height: 100%;
+    position: relative;
+   
+}
+#menu .items li{
+    list-style: none;
+    padding: 15px 0;
+    transition: 0.3s ease;
+    position: relative;
+    
+    
+}
+#menu .items li:hover{
+    background: #253047;
+    cursor: pointer;
+
+}
+
+
+
+#menu .items li i{
+    color: rgb(134, 141, 151);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 14px;
+    margin: 0 10px 0 25px;
+}
+#menu .items li:hover i,
+#menu .items li:hover a{
+    color: #f3f4f6;
+}
+#menu .items li a{
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: rgb(134, 141, 151);
+    font-weight: 300;
+    transition: 0.3s ease;
+}
+
+/* --------------End of Sidebar------------ */
+
+/* ------------navbar----------- */
+
+#interface{
+    width: calc(100% - 300px);
+    margin-left: 300px;
+    position: relative;
+    z-index: 2;
+    
+}
+/* .dash-home{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 6rem;
+    right: 2.5rem;
+    bottom: 50rem;
+} */
+#menu-btn{
+    font-size: 2.7rem;
+    position: absolute;
+    left: 2rem;
+    display: none;
+}
+#interface .navigation{
+   
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 10px 30px;
+    border-bottom: 3px solid #594ef7;
+    position: fixed;
+    width: calc(100% - 300px);
+    z-index: 10;
+    box-shadow: .1rem .1rem .5rem rgba(123, 122, 122, 0.5);
+    
+}
+#interface .navigation .search{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid #d7dbe6;
+    border-radius: 4px;
+}
+#interface .navigation .search i{
+    margin-right: 14px;
+}
+#interface .navigation .search input{
+    border: none;
+    outline: none;
+    font-size: 14px;
+
+}
+#interface .navigation .profile{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+
+}
+#interface .navigation .profile i{
+    margin-right: 20px;
+    font-size: 19px;
+    font-weight: 400;
+}
+#interface .navigation .profile img{
+    width: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+#interface .navigation .profile img:hover{
+    border: 1px solid #1F8A70;
+}
+/* profile menu */
+.profile-menu .profile-box img{
+    width: 90px;
+}
+.profile-menu{
+    position: absolute;
+    top: 110%;
+    right: -130%;
+    width: 26rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #40a38a;
+    border-radius: .2rem;
+    box-shadow: .1rem .1rem 1rem rgba(179, 177, 177, 0.5);
+    transition: all .3s linear;
+    z-index: 100;
+      
+}
+.profile-menu.active{
+    right: .5rem;
+    z-index: 100;
+    
+}
+
+.profile-menu .profile-box .profile-content{
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    line-height: 1.8;
+   
+}
+.profile-menu .profile-box .profile-content span{
+    font-size: 2rem;
+    font-weight: 500;
+    color: #fff;
+}
+.profile-menu .profile-box .profile-content p{
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #fff;
+}
+.profile-menu .profile-btn{
+    width: 100%;
+    border-top: 1px solid rgba(171, 169, 169, 0.5);
+    background: #fff;
+    padding: 1rem .5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.profile-menu .profile-btn a{
+    font-size: 1.2rem;
+    text-decoration: none;
+    background: rgba(171, 169, 169, 0.5);
+    padding: .5rem 1rem;
+    border-radius: .2rem;
+    color: rgb(47, 46, 46);
+}
+
+
+/* profile menu end*/
+.i-name{
+    margin-top: 60px;
+    color: #444a53;
+    padding: 30px 30px 0 30px;
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.i-name span{
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.5);
+}
+.i-name span i{
+    margin-right: .2rem;
+    color: #111827;
+}
+.h4-text{
+    font-size: 2rem;
+    font-weight: 500;
+    margin-left: 3rem;
+}
+.values{
+    padding: 30px 30px 0 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 2rem;
+    flex-wrap: wrap;
+    
+}
+.values .val-box{
+    background: #253047;
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+    
+}
+.values .val-box i{
+    font-size: 25px;
+    
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    background: #81a1ec;
+    margin-right: 15px;
+}
+.values .val-box h3{
+    font-size: 18px;
+    font-weight: 600;
+}
+.values .val-box span{
+    font-size: 15px;
+    color: #828997;
+}
+.board{
+    width: 100%;
+    margin: 30px 0 30px 30px;
+    overflow: auto;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.logo1{
+    
+    width: 100px;
+    height: 100px;
+    
+    
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 5px;
+    
+    
+}
+
+
+/* -----------------User Page Start---------------------- */
+.header{
+    width: 100%;
+    height: 100vh;
+    padding: 2rem 10rem 2rem 2rem;
+    display: flex;
+    justify-content: flex-start;
+    background: rgb(255, 255, 255);
+    position: relative;
+}
+.header .sidebar{
+    width: 200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-right: 1px solid rgba(92, 90, 90, 0.4);
+    padding: 12px 20px;
+    line-height: 2.5rem;
+    position: fixed;
+    
+
+
+}
+.header .sidebar ul li{
+    list-style: none;
+
+}
+.header .sidebar ul li a{
+    width: 100%;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: rgb(218, 144, 8);
+    font-weight: 500;
+    transition: all .5s;
+}
+.header .sidebar ul li a:hover{
+    color: #111827;
+}
+.header .main-content{
+    width: calc(100% - 200px);
+    height: 100vh;
+    margin-left: 205px;
+    
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.header .main-content .content-text{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .main-content .content-text h1{
+    color: rgb(218, 144, 8);
+    font-size: 2.3rem;
+    font-weight: 600;
+}
+.header .main-content .content-text a{
+    text-decoration: none;
+}
+.header .main-content .content-text a i{
+    font-size: 25px;
+    margin-right: 1.5rem;
+    color: rgb(218, 144, 8);
+}
+
+/* Main -  menu */
+.header .main-content .main-menu{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid rgba(92, 90, 90, 0.4);
+    
+    
+
+}
+.header .main-content .main-menu h3{
+    color: rgb(218, 144, 8);
+    font-size: 2.5rem;
+    
+}
+.header .main-content .main-menu img{
+    width: 200px;
+    
+}
+.header .main-content .main-menu span{
+    color: rgb(218, 144, 8);
+    font-size: 1.3rem;
+}
+.header .main-content form .main-menu .tools{
+    
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+    
+}
+.header .main-content form .main-menu .tools input{
+    margin-bottom: .5rem;
+    width: 20px;
+    text-align: right;
+    padding: .3rem;
+    outline: none;
+    border: none;
+    border: 1px solid rgb(218, 144, 8);
+    color: rgb(218, 144, 8);
+    display: none;
+}
+.header .main-content form .main-menu .tools .button{
+    
+    outline: none;
+    border: none;
+    padding: 5px 15px;
+    background: rgb(218, 144, 8);
+    color: #fff;
+    border-radius: 3px;
+    text-decoration: none;
+    
+    
+    
+}
+
+/* -----------------User Page End---------------------- */
+/* navi */
+
+/* table */
+.table-container{
+    padding: 2.5rem 1rem 2.5rem 1rem;
+    margin: 1rem 2rem 1rem 3rem;
+    border: 1px solid rgba(179, 177, 177, 0.5);
+    border-radius: .5rem;
+    position: relative;
+    box-shadow: .1rem .1rem .5rem rgba(179, 177, 177, 0.5);    
+}
+
+
+th{
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    
+}
+.btn{
+    font-size: 10rem;
+}
+td{
+    font-size: 1.1rem;
+    font-weight: 300;
+    text-transform: capitalize;
+}
+.date-picker{
+   display: flex;
+   align-items: center;
+   justify-content: right;
+   text-align: right;
+   position: relative;
+   width: 100%;
+   
+}
+.date-picker .date-box{
+    width: 18rem;
+    padding: .5rem;
+    border: 1px solid rgba(179, 177, 177, 0.5);
+    margin: 0 .5rem 0 .5rem;
+    border-radius: .5rem;
+    position: relative;
+    box-shadow: .1rem .1rem .5rem rgba(179, 177, 177, 0.5);
+    transition: all 4s ease;
+}
+.date-picker .date-box:hover{
+    border: #1F8A70;
+}
+.date-picker .date-box span{
+    color:rgba(40, 40, 40, 0.5) ;
+}
+.date-picker input{
+   outline: none;
+   border: none;
+   font-size: 1.3rem;
+   color: rgba(40, 40, 40, 0.5);
+   width: 100%;
+   cursor: text; 
+}
+.date-picker .date-box:nth-child(1){
+    position: absolute;
+    left: 0;
+    width: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 1rem;
+
+}
+.date-picker .date-box button{
+    outline: none;
+    border: none;
+    background: transparent;
+    color: #1F8A70;
+}
+.date-picker .date-box i{
+    font-size: 1.5rem;
+    margin: 0 .5rem;
+    
+}
+.date-picker .btn-date{
+    padding: .5rem 1.5rem;
+    font-size: 1.3rem;
+    outline: none;
+    border: none;
+    border-radius: .2rem;
+    background: #1F8A70;
+    color: #dbdada;
+    transition: all .3s ease-in-out;
+    box-shadow: .1rem .1rem .5rem rgba(179, 177, 177, 0.5);
+    
+}
+.date-picker .btn-date:hover{
+    background: #43b79a;
+    color: #fff;
+}
+.no-record{
+    position: absolute;
+    bottom: 1rem;
+    text-align: center;
+    width: 100%;
+    font-size: 1.1rem;
+}
+
+/* chart for monthly lottery  */
+.chart-box{
+    padding: 0 3rem;
+    width: 100%;
+    
+}
+.chart-box .chart-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(181, 178, 178, 0.5);
+    padding: .5rem 0;
+}
+.chart-box .chart-header h4{
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+.chart-box .chart-header .year span{
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+.chart-box .chart-header .year select{
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: .2rem;
+    outline: none;
+    border: 1px solid rgba(135, 132, 132, 0.5);
+}
+.chart-box .chart-info{
+    width: 100%;
+    
+}
+
+/* Alert Message */
+
+.alert-msg{
+    position: fixed;
+    right: .5rem;
+    bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(87, 154, 128, 0.924);
+    padding: .5rem 2rem;
+    border-radius: .5rem;
+    color: #fff;
+    z-index: 20;
+    box-shadow: .2rem .2rem .2rem rgba(134, 133, 133, 0.6);
+    border-top: 2px solid green;
+    transition: all .5s linear;
+}
+.alert-msg .icon{
+    margin-right: 1rem;
+    font-size: 2rem;
+}
+.alert-msg .msg span{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.alert-msg .msg p{
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width:991px)
+{
+    html{
+        font-size: 55%;
+    }
+}
+@media(max-width:850px)
+{
+    html{
+        font-size: 52%;
+    }
+    #interface .navigation .search{
+        display: none;
+    }
+    #menu-btn{
+        display: block;
+        
+    }
+    #close{
+        display: block;
+        transition: all .5s linear;
+    }
+    #menu{
+        background: #111827;
+        width: 25rem;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: -130%;
+        z-index: 3;
+        transition: all .5s linear;
+        
+    }
+    #menu.active{
+        left: -1.5rem;
+    }
+    #interface{
+        width: 100%;
+        margin-left: 0;
+    }
+    #interface .navigation{
+        width: 100%;
+        z-index: 2;
+       
+    }
+}
+
+
+@media(max-width: 780px)
+{
+    html{
+        font-size: 50%;
+    }
+    #interface .navigation .search{
+        display: none;
+    }
+    #menu-btn{
+        display: block;
+        
+    }
+    #close{
+        display: block;
+        transition: all .5s linear;
+    }
+    #menu{
+        background: #111827;
+        width: 25rem;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: -130%;
+        z-index: 3;
+        transition: all .5s linear;
+        
+    }
+    #menu.active{
+        left: -1.5rem;
+    }
+    #interface{
+        width: 100%;
+        margin-left: 0;
+    }
+    #interface .navigation{
+        width: 100%;
+        z-index: 2;
+       
+    }
+}
+
+@media(max-width: 550px){
+    html{
+        font-size: 45%;
+    }
+    
+
+    .date-picker .date-box{
+        width: 12rem;
+    }
+    .date-picker .date-box button{
+        padding: .2rem .5rem;
+    }
+    .date-picker .date-box:first-child{
+        width: 12rem;
+    }
+    .date-picker .date-box:first-child i{
+        font-size: 1.1rem;
+    }
+}

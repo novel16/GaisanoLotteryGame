@@ -33,11 +33,11 @@
     <?php include('includes/navbar.php'); ?>
 
         <h3 class="i-name">
-            Lottery Result
+        Slot Result
             <div class="home-gauge">
                 <span><i class="fa-solid fa-gauge"></i>Home</span>
                 <span>></span>
-                <span>Lottery Result</span>
+                <span>Slot Result</span>
             </div>
         </h3>
 
@@ -69,7 +69,7 @@
             <table class = "table table-borderless table-striped display" id = "mydatatable" style="width:100%;">
                 <thead>
                     <tr>
-                        <th>Lottery #</th>
+                        <th>Slot ID</th>
                         <th>Invoice</th>
                         <th>Name</th>
                         <th>Placed no.</th>

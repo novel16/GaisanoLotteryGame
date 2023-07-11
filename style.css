@@ -21,7 +21,7 @@ body::after{
     top:0;
     left:0;
     width: 100%;
-    height: 100%;
+    height: auto;
     background: rgba(0,0,0,0.1);
     z-index: 1;
 }
@@ -37,8 +37,28 @@ body::after{
     position: relative;
     z-index: 100;
     
-    
-    
+}
+.container .customer-prizes{
+    position: absolute;
+    left: 0;
+    padding: 1rem;
+    width: 25rem;
+    top: 18rem;
+    height: auto;
+    background: #5c276b;
+    color: #fff;
+    border-radius: .5rem;
+}
+.container .customer-prizes .container-box .header-title{
+    display: flex;
+    justify-content: space-between;
+    margin: .5rem 0;
+}
+.container .customer-prizes .container-box table th{
+    border-bottom: 1px solid #fff;
+}
+.container .customer-prizes .container-box table th,td{
+    color: #fff;
 }
 .container .lottery{
     padding: 4rem;
@@ -47,14 +67,24 @@ body::after{
     border-radius: .5rem;
     box-shadow: .1rem .1rem 1rem rgba(163, 160, 160, 0.5);
     transition: all .3s ease-in-out;
-    border: 1.2rem solid #ff093a;
+    border: 1.5rem solid #ff093a;
     box-shadow: 0rem 1.5rem 2rem rgba(7, 7, 7, 0.6);
     /* background-image: url(images/slotmachine.PNG);
     background-position: center;
     background-size: cover;
     position: relative; */
-
+    position: relative;
 }
+.container .lottery::after {
+    content: "";
+    position: absolute;
+    top: -1.7rem;
+    left: -1.7rem;
+    right: -1.7rem;
+    bottom: -1.7rem;
+    border: 2rem dotted #ff093a;
+}
+
 #message{
     font-size: 3.5rem;
     font-weight: 700;
@@ -65,11 +95,9 @@ body::after{
     color: #fff;
     border-right: 1rem solid #ff093a;
     border-top: 1rem solid #ff093a;
-    border-left: 1rem solid #ff093a;
-    
-    
+    border-left: 1rem solid #ff093a;  
+    position: relative;
 }
-
 .container .lottery .lottery-box{
     padding: 2rem 0;
     display: flex;
@@ -108,11 +136,21 @@ body::after{
     border-radius: .5rem;
     width: 52rem;
     box-shadow: 0rem 1.5rem 2rem rgba(7, 7, 7, 0.6);
-    border: 1.2rem solid #ff093a;
+    border: 1.5rem solid #ff093a;
+    position: relative;
+}
+.container .lottery-input::after {
+    content: "";
+    position: absolute;
+    top: -1.7rem;
+    left: -1.7rem;
+    right: -1.7rem;
+    bottom: -1.7rem;
+    border: 2rem dotted #ff093a;
 }
 .container .lottery-input h3{
     text-transform: capitalize;
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: #c99121;
     margin-bottom: 2rem;
     color: linear-gradient(to right, #FF0032, #5D3891);
@@ -213,7 +251,7 @@ body::after{
     margin-left: 5%;
 }
 .navbar .logo img{
-    width: 50px;
+    width: 45px;
 }
 .navbar .logo h2{
     font-size: 3.5rem;
@@ -376,6 +414,36 @@ body::after{
     html{
         font-size: 55%;
     }
+    #message{
+        font-size: 3rem;
+    }
+    .container .lottery{
+        width: 48rem;
+    }
+    .container .lottery-input{
+        width: 48rem;
+    }
+    .entries{
+        width: 12rem;
+    }
+    .entries h5{
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+    .entries .entries-box input{
+        font-size: 4.5rem;
+        font-weight: 500;
+        
+    }
+    .container .customer-prizes{
+       margin-left: -10rem;
+       width: 22rem;
+       
+    }
+    /* .container .customer-prizes .container-box{
+        
+    }
+     */
 }
 
 

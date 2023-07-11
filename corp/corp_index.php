@@ -1,9 +1,54 @@
 <?php
 session_start();
-if(isset($_SESSION['admin']))
+include('../connect.php');
+
+// $setPass = "";
+// $pass = password_hash($setPass, PASSWORD_DEFAULT);
+// echo $pass;
+
+if(isset($_POST['login']))
 {
-    header('location: home.php');
+    $username = $_POST['username'];
+    $username = filter_var($username, FILTER_SANITIZE_STRING);
+    $password = $_POST['password'];
+    $password = filter_var($password, FILTER_SANITIZE_STRING);
+
+    $sql = "SELECT * FROM `user` WHERE username = :username LIMIT 1";
+    $verify_user = $conn->prepare($sql);
+    $verify_user->bindparam(':username',$username);
+    $verify_user->execute();
+
+    if($verify_user->rowCount() > 0)
+    {
+        $fetch = $verify_user->fetch(PDO:: FETCH_ASSOC);
+        $verify_pass = password_verify($password, $fetch['password']);
+
+        if($verify_pass == 1 && $fetch['role'] == 'Corp')
+        {
+            $_SESSION['corp'] = $fetch['username'];
+            $_SESSION['Corp-success'] = 'Welcome Back!';
+             header('location: grand_allocation.php');
+           
+            
+        }
+        else
+        {
+            // header('location: corp_index.php');
+            $_SESSION['corp-error'] = 'Password did not match';
+        }
+    }
+    else{
+        // header('location: corp_index.php');
+        $_SESSION['corp-error'] = 'Username not found';
+    }   
+
 }
+else{
+    //  header('location: corp_index.php');
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,8 +201,8 @@ img{
     
     <div class="login-container">
         <div class="login-box">
-            <h3>Admin Credentials</h3>
-            <form action="login.php" method = "POST">
+            <h3>Corp. Credentials</h3>
+            <form action="" method = "POST">
                 <div class="input-group">
                     <span>Username:</span>
                     <input type="text" name = "username">
@@ -172,10 +217,10 @@ img{
             
         </div>
         <?php
-            if(isset($_SESSION['error'])){
+            if(isset($_SESSION['corp-error'])){
                 ?>
 
-                <p id = "error-message"><?php echo $_SESSION['error']; ?></p>
+                <p id = "error-message"><?php echo $_SESSION['corp-error']; ?></p>
 
                 <script>
                     setTimeout(function() {

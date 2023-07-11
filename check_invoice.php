@@ -37,7 +37,7 @@ if(isset($_POST['invoice']))
                 $phone = $_POST['phone'];
                 $phone = filter_var($phone, FILTER_SANITIZE_NUMBER_INT);
 
-
+                //check if there's a record in entries table
                 $check_entry_sql = "SELECT * FROM entries WHERE status = 'Active' ORDER BY id DESC LIMIT 1";
                 $check_entry_stmt = $conn->prepare($check_entry_sql);
                 $check_entry_stmt->execute();
@@ -46,69 +46,69 @@ if(isset($_POST['invoice']))
                 if($check_entry_stmt->rowCount() > 0){
 
                 
-                if($amount >= $check_entry_fetch['amount'])
-                {
-                    $amount_per_entry = $check_entry_fetch['amount'];
-                    $total_entry = 0;
-                    
-                    $total_entry = floor($amount / $amount_per_entry);
-
-                    $sql_entry = "INSERT INTO `customer_entries`(`customer_invoice`, `num_of_entries`, `total_entries`) VALUES (:customer_invoice, :num_of_entries, :total_entries)";
-
-                    $entry_stmt = $conn->prepare($sql_entry);
-                    $entry_stmt->bindParam(':customer_invoice',$invoice);
-                    $entry_stmt->bindParam(':num_of_entries',$total_entry);
-                    $entry_stmt->bindParam(':total_entries',$total_entry);
-                    $entry_stmt->execute();
-
-
-                    $sql = "INSERT INTO `customer`(`invoice`, `amount`, `fullname`, `email`, `phone`) VALUES (:invoice, :amount, :fullname, :email, :phone)";
-
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bindparam(':invoice', $invoice);
-                    $stmt->bindparam(':amount', $amount);
-                    $stmt->bindparam(':fullname', $fullname);
-                    $stmt->bindparam(':email', $email);
-                    $stmt->bindparam(':phone', $phone);
-                    $stmt->execute();
-
-                    
-
-                    if($stmt)
+                    if($amount >= $check_entry_fetch['amount'])
                     {
-                        $_SESSION['success'] = 'Customer successfully added!';
-                       // $_SESSION['invoice'] = $invoice;
-                        $_SESSION['fullname'] = $fullname;
+                        $amount_per_entry = $check_entry_fetch['amount'];
+                        $total_entry = 0;
+                        
+                        $total_entry = floor($amount / $amount_per_entry);
 
-                       
+                        $sql_entry = "INSERT INTO `customer_entries`(`customer_invoice`, `num_of_entries`, `total_entries`) VALUES (:customer_invoice, :num_of_entries, :total_entries)";
 
-                        $customer_status_sql = "INSERT INTO `customer_status`(`customer_invoice`) VALUES (:customer_invoice)";
-                        $customer_status_stmt = $conn->prepare($customer_status_sql);
-                        $customer_status_stmt->bindParam(':customer_invoice', $invoice);
-                        $customer_status_stmt->execute();
+                        $entry_stmt = $conn->prepare($sql_entry);
+                        $entry_stmt->bindParam(':customer_invoice',$invoice);
+                        $entry_stmt->bindParam(':num_of_entries',$total_entry);
+                        $entry_stmt->bindParam(':total_entries',$total_entry);
+                        $entry_stmt->execute();
+
+
+                        $sql = "INSERT INTO `customer`(`invoice`, `amount`, `fullname`, `email`, `phone`) VALUES (:invoice, :amount, :fullname, :email, :phone)";
+
+                        $stmt = $conn->prepare($sql);
+                        $stmt->bindparam(':invoice', $invoice);
+                        $stmt->bindparam(':amount', $amount);
+                        $stmt->bindparam(':fullname', $fullname);
+                        $stmt->bindparam(':email', $email);
+                        $stmt->bindparam(':phone', $phone);
+                        $stmt->execute();
+
                         
 
-                        header('location: customer_input.php');
+                        if($stmt)
+                        {
+                            $_SESSION['success'] = 'Customer successfully added!';
+                        // $_SESSION['invoice'] = $invoice;
+                            $_SESSION['fullname'] = $fullname;
+
+                        
+
+                            $customer_status_sql = "INSERT INTO `customer_status`(`customer_invoice`) VALUES (:customer_invoice)";
+                            $customer_status_stmt = $conn->prepare($customer_status_sql);
+                            $customer_status_stmt->bindParam(':customer_invoice', $invoice);
+                            $customer_status_stmt->execute();
+                            
+
+                            header('location: customer_input.php');
+                            
+                        }
+                        else
+                        {
+                            echo '<script>
+                            alert("Failed to insert data");
+                            window.location = "customer_input.php";
+                            </script>';
+                        }
                         
                     }
                     else
                     {
+                    
                         echo '<script>
-                        alert("Failed to insert data");
+                        alert("Invalid Amount | The amount should be atleast ₱'.$check_entry_fetch['amount'].' and up.");
                         window.location = "customer_input.php";
                         </script>';
+                        
                     }
-                    
-                }
-                else
-                {
-                   
-                    echo '<script>
-                    alert("Invalid Amount | The amount should be atleast ₱'.$check_entry_fetch['amount'].' and up.");
-                    window.location = "customer_input.php";
-                    </script>';
-                    
-                }
             }
             else
             {

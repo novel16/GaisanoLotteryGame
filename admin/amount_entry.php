@@ -112,7 +112,7 @@
 
                                     <div class="form-group mb-3">
                                         <label for="Amount / Entry">Amount / Entry</label>
-                                        <input type="text" name="amount_entry" class="form-control">
+                                        <input type="text" id="amount_entry" name="amount_entry" class="form-control" required>
                                     </div>
 
                                     <button type="submit" name="save" onclick="return confirm('Are you sure? You want to add this amount?')" class="btn btn-primary btn-block">Submit</button>
@@ -199,10 +199,20 @@
         $(document).ready(function () {
 
             $('#datatable').DataTable({
+
+                order: [[0, 'desc']],
                
             });
         });
 
+    </script>
+
+    <script>
+        document.getElementById("amount_entry").addEventListener("input", function (event) {
+        if (!/^[0-9]+(\.[0-9]*)?$/.test(event.target.value)) {
+            event.target.value = event.target.value.slice(0, -1);
+        }
+        });
     </script>
 
 </body>

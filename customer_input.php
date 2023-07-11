@@ -56,7 +56,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
         <?php
         }else{
         ?>
-            <span class="text-danger" style="font-size: 1.4rem;">No amount per entry found</span>
+            <span class="text-danger" style="font-size: 1.4rem;">No Amount / Entry Found</span>
         <?php
         }
         ?>
@@ -66,7 +66,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
         <form action="check_invoice.php" method = "POST">
             <div class="input-content">
                 <div class="left-input">
-                    <input type="text" name = "invoice" value ="<?php echo isset($_POST['invoice']) ? $_POST['invoice'] : ''; ?>" placeholder = "Enter your invoice no." onkeyup = "checkInvoice(this.value)" required>
+                    <input type="text" autofocus name = "invoice" value ="<?php echo isset($_POST['invoice']) ? $_POST['invoice'] : ''; ?>" placeholder = "Enter your invoice no." onkeyup = "checkInvoice(this.value)" required>
                     <input type="text" id="amount" name = "amount"  placeholder = "Enter amount"  required>
                     
                     <input type="text" name = "fullname" placeholder ="Enter your fullname" required>
@@ -95,7 +95,7 @@ if(!isset($_SESSION['user']) || trim($_SESSION['user'])== '')
                         <th>E-mail</th>
                         <th>Phone</th>
                         <th>Date</th>
-                        <th>Lottery Status</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>

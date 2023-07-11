@@ -23,7 +23,7 @@ if(!isset($_SESSION['user']))
 
 
 
-        $sql = "SELECT c.id, c.invoice, c.fullname, s.status, e.total_entries from customer as c 
+        $sql = "SELECT c.id, c.invoice, c.fullname, s.status, e.num_of_entries ,e.total_entries from customer as c 
         INNER JOIN customer_status as s ON c.invoice = s.customer_invoice 
         INNER JOIN customer_entries AS e ON c.invoice = e.customer_invoice WHERE status = 'Pending' ORDER BY id ASC LIMIT 1 ";
         $stmt = $conn->prepare($sql);
@@ -51,13 +51,50 @@ if(!isset($_SESSION['user']))
 
         //Grand Prize allocation day
 
-        $allocation_day_sql = "SELECT * FROM allocation WHERE status = '1'";
+        // $allocation_day_sql = "SELECT * FROM allocation WHERE status = '1'";
+        // $allocation_day_stmt = $conn->prepare($allocation_day_sql);
+        // $allocation_day_stmt->execute();
+
+        // $allocation_day_row = $allocation_day_stmt->fetch(PDO::FETCH_ASSOC);
+
+        // $grand_allocation_day = $allocation_day_row['day'];
+        
+        // $grand_allocation_day_json = json_encode($grand_allocation_day);
+
+
+        //Grand Allocation Day
+        $allocation_day_sql = "SELECT * FROM allocation";
         $allocation_day_stmt = $conn->prepare($allocation_day_sql);
         $allocation_day_stmt->execute();
-        $allocation_day_row = $allocation_day_stmt->fetch(PDO::FETCH_ASSOC);
-        
-        $grand_allocation_day = $allocation_day_row['day'];
-        $grand_allocation_day = json_encode($grand_allocation_day);
+
+        $grand_allocation_days = [];
+
+        while ($allocation_day_row = $allocation_day_stmt->fetch(PDO::FETCH_ASSOC)) {
+            $grand_allocation_days[] = $allocation_day_row['day'];
+        }
+
+       
+
+        $grand_allocation_day_json = json_encode($grand_allocation_days);
+
+
+        //2nd prize allocation day
+        $second_allocation_day_sql = "SELECT * FROM second_prize_allocation";
+        $second_allocation_day_stmt = $conn->prepare($second_allocation_day_sql);
+        $second_allocation_day_stmt->execute();
+
+        $second_allocation_days = [];
+
+        while($second_allocation_day_row = $second_allocation_day_stmt->fetch(PDO::FETCH_ASSOC))
+        {
+
+            $second_allocation_days[] = $second_allocation_day_row['day'];
+
+        }
+
+        $second_allocation_days_json = json_encode($second_allocation_days);
+
+      
 
         
         
@@ -82,15 +119,48 @@ if(!isset($_SESSION['user']))
 
     <link rel="stylesheet" href="fontawesome/all.min.css">
     <script src="fontawesome/6fc1f0eac0.js"></script>
+
+    <style>
+        @media print{
+            .noprint{
+                
+                visibility: hidden;
+                
+                
+            }
+            .customer-prizes.justprint{
+                margin: 0;
+                padding: 0;
+                margin-top: -16rem;
+                width: 302.4px;
+                color: #ccc;
+                background: none;
+                font-size: 2rem;
+            }
+            .customer-prizes.justprint h5{
+                font-size: 1.8rem;
+            }
+            .customer-prizes .print-display{
+               display: block;
+            }
+        }
+        .customer-prizes .print-display{
+               display: none;
+            }
+
+       
+    </style>
     
 </head>
 <body>
-
-    <?php include('nav-bar.php'); ?>
+    <div class="noprint">
+        <?php include('nav-bar.php'); ?>
+    </div>
+    
     
     
     <!-- entries -->
-    <div class="entries" id="entries">
+    <div class="entries noprint" id="entries">
         <h5>Total Entries</h5>
         <div class="entries-box">
             <input type="text" id="total_entry"  name="total_entry" readonly>
@@ -99,31 +169,51 @@ if(!isset($_SESSION['user']))
     </div>
 
     <div class="next-player">
-        <button type="button" id="nextPlayerBtn" class="btn btn-success"><i class="fa-solid fa-forward"></i> Next Player</button>
+        <button type="button" id="nextPlayerBtn"  class="noprint btn btn-success text-light"><i class="fa-solid fa-forward"></i> Next Player</button>
     </div>
     
 
     <div class="container">
 
-        <marquee id="marquee" direction="left" scrollamount="20">
+        <marquee id="marquee" class="noprint" direction="left" scrollamount="20">
         <h1 class="marquee-h1" style="text-transform: uppercase;"><?php echo $fullname; ?> <span id="marquee-message">- you are now ready to play ! </span></h1>
         </marquee>
 
 
-        <h1 id="message" class="">GCAP SLOTS</h1>
-            <div class="lottery">
+        <h1 id="message" class="noprint">GCAP SLOTS</h1>
+
+            <div class="customer-prizes justprint">
+                <div class="print-display">
+                    <h2>Gaisano Capital</h2>
+                </div>
+                
+                <div class="container-box">
+                    <h5 class="d-flex justify-content-start text-capitalize"><?php echo $fullname; ?></h5>
+                    <div class="header-title">   
+                        <span>Entries : <b><?php echo $row['num_of_entries'] ?></b></span>
+                        <span>Invoice # : <b><?php echo $row['invoice']; ?></b></span>
+                    </div>
+
+                    <table class="table table-borderless" id="display-prizes">
+                       
+                    </table>
+                    <button type="button"  onclick="window.print(); " class="noprint btn btn-primary d-flex justify-content-start mt-5">Print Receipt</button>
+                </div>
+            </div>
+
+            <div class="lottery noprint">
                
                 <form action="lottery_insert_data.php" id= "" name="save" method = "POST">
-                <div class="lottery-box">
-                    
-                    <div id="one" class="odometer"  name="one" >0</div>
-                    <div id="two" class="odometer" name="two" >0</div>
-                    <div id="three" class="odometer" name="three" >0</div>
-                </div>
+                    <div class="lottery-box">
+                        
+                        <div id="one" class="odometer"  name="one" >0</div>
+                        <div id="two" class="odometer" name="two" >0</div>
+                        <div id="three" class="odometer" name="three" >0</div>
+                    </div>
                         
             </div>
 
-            <div class="lottery-input" id = "reload-input">
+            <div class="lottery-input noprint" id = "reload-input">
                     <h3>place your 3-digit number</h3>
 
                     <div class="lottery-box">
@@ -204,14 +294,12 @@ if(!isset($_SESSION['user']))
   let table = document.getElementById('mytable');
   var invoice_lottery = <?php echo $invoice; ?>;
   var currentDay = <?php echo $current_day; ?>;
-  var grandAllocationDay = <?php echo $grand_allocation_day; ?>;
+  var grandAllocationDay = <?php echo $grand_allocation_day_json; ?>;
+  var secondAllocationDay = <?php echo $second_allocation_days_json ?>;
 
 
-  
-alert(grandAllocationDay);
-
-  
-    
+//   alert(secondAllocationDay);
+ 
   btn.addEventListener('click', function() {
     if (input_one.value === "" || input_two.value === "" || input_three.value === "") {
       message.style = "color: red";
@@ -237,7 +325,7 @@ alert(grandAllocationDay);
        
 
         
-      }, 100);
+      }, 50);
       setTimeout(function() {
        clearInterval(intervalId);
        
@@ -247,48 +335,54 @@ alert(grandAllocationDay);
         
         xhr.onload = function() {
             if (randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
-                // if (grandAllocationDay === currentDay) {
+            
                     message.style = "color: #fff";
                     message.innerHTML = "YOU WIN THE GRAND PRIZE !";
-                // } else {
-                //     //  generateNewNumbers();
-                        
-                //         if (randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value) {
-                //             message.style = "color: #fff";
-                //             message.innerHTML = "YOU WIN THE 2nd PRIZE !";
-                //         } else if (randomone.innerHTML === input_one.value && randomthree.innerHTML === input_three.value) {
-                //             message.style = "color: #fff";
-                //             message.innerHTML = "YOU WIN THE 2nd PRIZE !";
-                //         } else if (randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
-                //             message.style = "color: #fff";
-                //             message.innerHTML = "YOU WIN THE 2nd PRIZE !";
-                //         } else if (randomone.innerHTML === input_one.value || randomtwo.innerHTML === input_two.value || randomthree.innerHTML === input_three.value) {
-                //             message.style = "color: #fff";
-                //             message.innerHTML = "YOU WIN THE 3rd PRIZE !";
-                //         } else {
-                //             message.innerHTML = "THANK YOU! BETTER LUCK NEXT TIME!";
-                //             message.style = "color: #fff; font-size: 2.5rem; font-weight: 500;";
-                //         }
-                        
-                //     //sendRequest(); 
-                // }
-                
+                    
+                    randomone.style = "background: #5c276b; color:#fff;";
+                    randomtwo.style = "background: #5c276b; color:#fff;";
+                    randomthree.style = "background: #5c276b; color:#fff;";
+                 
             } 
             else if (randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value) {
                 message.style = "color: #fff";
                 message.innerHTML = "YOU WIN THE 2nd PRIZE !";
+
+                randomone.style = "background: #5c276b; color:#fff;";
+                randomtwo.style = "background: #5c276b; color:#fff;";
             }
              else if (randomone.innerHTML === input_one.value && randomthree.innerHTML === input_three.value) {
                 message.style = "color: #fff";
                 message.innerHTML = "YOU WIN THE 2nd PRIZE !";
+
+                randomone.style = "background: #5c276b; color:#fff;";
+                randomthree.style = "background: #5c276b; color:#fff;";
             }
              else if (randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
                 message.style = "color: #fff";
                 message.innerHTML = "YOU WIN THE 2nd PRIZE !";
+
+                randomtwo.style = "background: #5c276b; color:#fff;";
+                randomthree.style = "background: #5c276b; color:#fff;";
             } 
              else if (randomone.innerHTML === input_one.value || randomtwo.innerHTML === input_two.value || randomthree.innerHTML === input_three.value) {
                 message.style = "color: #fff";
                 message.innerHTML = "YOU WIN THE 3rd PRIZE !";
+
+                if(randomone.innerHTML === input_one.value)
+                {
+                    randomone.style = "background: #5c276b; color:#fff;";
+                }
+                if(randomtwo.innerHTML === input_two.value)
+                {
+                    randomtwo.style = "background: #5c276b; color:#fff;";
+                }
+                if(randomthree.innerHTML === input_three.value)
+                {
+                    randomthree.style = "background: #5c276b; color:#fff;";
+                }
+
+                
             } 
              else {
                 message.innerHTML = "THANK YOU! BETTER LUCK NEXT TIME!";
@@ -311,36 +405,76 @@ alert(grandAllocationDay);
             xhr.send(params);
         }
 
+        // randomone.innerHTML = 1;
+        // randomtwo.innerHTML = 2;
+        // randomthree.innerHTML = 3;
 
         if (randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value) {
     
-            if (grandAllocationDay !== currentDay) {
+            if (!grandAllocationDay.includes(currentDay)) {
 
                 generateNewNumbers();
 
             }
         }
+
+        else if (randomone.innerHTML === input_one.value && randomtwo.innerHTML === input_two.value){
+
+            if (!secondAllocationDay.includes(currentDay)) {
+
+                generateNewNumbers();
+
+            }
+        }
+        else if (randomone.innerHTML === input_one.value && randomthree.innerHTML === input_three.value){
+
+            if (!secondAllocationDay.includes(currentDay)) {
+
+                generateNewNumbers();
+
+            }
+
+        }
+
+        else if (randomtwo.innerHTML === input_two.value && randomthree.innerHTML === input_three.value){
+
+            if (!secondAllocationDay.includes(currentDay)) {
+
+                generateNewNumbers();
+
+            }
+
+        }
+        
         sendRequest(); 
     
-      }, 1000);
+      }, 4000);
     }
   });
 
  
-    function numberone() {
-        randomone.innerHTML = (Math.floor(Math.random() * 10)); 
-    }
 
-    function numbertwo() {
-        randomtwo.innerHTML = (Math.floor(Math.random() * 10));
+    function numberone() {
+
+        randomone.innerHTML = (Math.floor(Math.random() * 10)); 
         
+    }
+    function numbertwo() {
+
+        randomtwo.innerHTML = (Math.floor(Math.random() * 10));
+       
     }
 
     function numberthree() {
+
         randomthree.innerHTML = (Math.floor(Math.random() * 10));
+        
         message.style = "color:#fff";
         message.innerHTML = "Please wait for the result..";
-        btn.disabled = true;     
+        btn.disabled = true; 
+        randomone.style = "reset";
+        randomtwo.style = "reset";
+        randomthree.style = "reset";    
     }
 
 
@@ -388,6 +522,7 @@ document.addEventListener('keydown', function(event) {
 
 <script type="text/javascript">
 
+    //check for total entries left
     $(document).ready(function(){
 
         var invoice = <?php echo $invoice; ?>;
@@ -404,6 +539,39 @@ document.addEventListener('keydown', function(event) {
             success: function(response) {
             
                 $("#total_entry").val(response);
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+            console.log('Error checking for updates: ' + textStatus + ', ' + errorThrown);
+            }
+        });
+        }, 50);
+
+    });
+
+
+    
+   
+
+</script>
+<script>
+
+     $(document).ready(function(){
+
+        var invoice = <?php echo $invoice; ?>;
+
+      //  alert(invoice);
+
+        setInterval(function() {
+        // make AJAX request to server to check for updates
+        $.ajax({
+            url: 'customer_prizes.php',
+            type: 'POST',
+            data: { invoice: invoice },
+            // dataType: 'json',
+            success: function(response) {
+            
+                $("#display-prizes").html(response);
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -442,4 +610,9 @@ document.addEventListener('keydown', function(event) {
 
 </body>
 </html>
+
+
+
+
+
 

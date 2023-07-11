@@ -34,7 +34,7 @@ if(isset($_POST['one']) && isset($_POST['two']) && isset($_POST['three']))
 
             if($one === $input_one && $two === $input_two && $three === $input_three)
             {
-                $status = "Grand Prize";
+                $status = "Win";
                 $prizes = "Grand Prize";
             }
             else if($one === $input_one && $two === $input_two)
